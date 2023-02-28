@@ -1,0 +1,27 @@
+const { Goal } = require('../models');
+
+const goaldata = [
+  {
+    name: 'personal objective 1 - acquire full stack developer skills',
+    body: 'Attend UofT bootcamp, make sure you ask many questions to the instructor, TAs and tutors ',
+    date: 'December 01, 2022 09:00:00',
+    user_id: 1,
+  },
+  {
+    name: 'Personal objective 2 - weekly golf club',
+    body: 'Professional goals for golf, maintain relationships, annual membership budget',
+    date: 'January 12, 2023 17:00:00',
+    user_id: 1,
+  },
+  {
+    name: 'Personal objective 3 - career development',
+    body: 'job related professional objective',
+    date: 'January 13, 2023 17:00:00',
+    user_id: 2,
+  },
+  
+];
+
+const seedPost = () => Goal.bulkCreate(goaldata);
+
+module.exports = seedPost;
