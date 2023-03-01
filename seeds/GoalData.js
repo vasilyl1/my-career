@@ -24,4 +24,6 @@ const goaldata = [
 
 const seedGoal = () => Goal.bulkCreate(goaldata);
 
+
 module.exports = seedGoal;
+
