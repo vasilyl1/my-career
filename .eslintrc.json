@@ -14,7 +14,7 @@
     "vars-on-top": "error",
     "no-trailing-spaces": "error",
     "no-mixed-spaces-and-tabs": "error",
-    "comma-dangle": "error",
+    "comma-dangle": ["error", "never"],
     "no-redeclare": "error",
     // force indentation with one tab
     "indent": ["error", 2],
