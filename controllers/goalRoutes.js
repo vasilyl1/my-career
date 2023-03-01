@@ -14,14 +14,11 @@ router.get('/user', async (req, res) => {
         }
       ],
       where: {
-        //user_id: req.session.user_id,    commented out for testing purposes
-        user_id: 1
+        user_id: req.session.user_id
       }
     });
     const goals = goalData.map((goal) =>
       goal.get({ plain: true }));
-      console.log(goals);
-      console.log(req.session.loggedIn);
     res.render('userdashboard', { // render handlebar view to display all goals by selected user
       goals,
       loggedIn: req.session.loggedIn
