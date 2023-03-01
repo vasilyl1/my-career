@@ -19,7 +19,7 @@
     // force indentation with one tab
     "indent": ["error", 2],
     // Enforce camelcase naming convention
-    "camelcase": ["error"],
+    "camelcase": "error",
     // It is considered good practice to use the type-safe equality operators === and !== instead of their regular counterparts == and !=.
     "eqeqeq": ["error", "smart"],
     // Disallow the use of alert, confirm, and prompt
