@@ -27,7 +27,7 @@
     // Yoda conditions are so named because the literal value of the condition comes first while the variable comes second. 
     "yoda": ["error", "never", { "exceptRange": true }],
     // It will warn when the maximum amount of empty lines has been exceeded.
-    "no-multiple-empty-lines": "error",
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0 }],
     // Multiple spaces in a row that are not used for indentation are typically mistakes
     "no-multi-spaces": ["error", { "ignoreEOLComments": false }],
     // This rule normalize style of spacing before/after an arrow function’s arrow(=>).
