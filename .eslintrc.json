@@ -15,7 +15,25 @@
     "no-trailing-spaces": "error",
     "no-mixed-spaces-and-tabs": "error",
     "comma-dangle": "error",
-    "no-redeclare": "error"
+    "no-redeclare": "error",
+    // force indentation with one tab
+    "indent": ["error", "tab"],
+    // Enforce camelcase naming convention
+    "camelcase": ["error", {"ignoreDestructuring": true}],
+    // It is considered good practice to use the type-safe equality operators === and !== instead of their regular counterparts == and !=.
+    "eqeqeq": ["error", "smart"],
+    // Disallow the use of alert, confirm, and prompt
+    "no-alert": "error",
+    // Yoda conditions are so named because the literal value of the condition comes first while the variable comes second. 
+    "yoda": ["error", "never", { "exceptRange": true }],
+    // It will warn when the maximum amount of empty lines has been exceeded.
+    "no-multiple-empty-lines": "error",
+    // Multiple spaces in a row that are not used for indentation are typically mistakes
+    "no-multi-spaces": ["error", { "ignoreEOLComments": false }],
+    // This rule normalize style of spacing before/after an arrow function’s arrow(=>).
+    "arrow-spacing": "error",
+    // Require spacing around embedded expressions of template strings
+    "template-curly-spacing": ["error", "always"]
   },
   "extends": []
 }
