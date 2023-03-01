@@ -8,9 +8,6 @@ router.get('/userdashboard', async (req, res) => {
       include: [
         {
           model: Comment
-        },
-        {
-          model: User
         }
       ],
       where: {
@@ -37,9 +34,6 @@ router.get('/advisordashboard', async (req, res) => {
       include: [
         {
           model: Comment
-        },
-        {
-          model: User
         }
       ],
       where: {
