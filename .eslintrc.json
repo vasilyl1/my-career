@@ -15,8 +15,7 @@
     "no-trailing-spaces": "error",
     "no-mixed-spaces-and-tabs": "error",
     "comma-dangle": "error",
-    "no-redeclare": "error",
-    "linebreak-style": ["error", "unix"]
+    "no-redeclare": "error"
   },
   "extends": []
 }

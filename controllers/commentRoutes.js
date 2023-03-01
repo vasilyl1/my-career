@@ -1,15 +1,5 @@
 const router = require('express').Router();
-const { Comment } = require('../models');
-
-// GET all comments
-router.get('/', async (req, res) => {
-  try {
-    const commentsData = await Comment.findAll();
-    res.status(200).json(commentsData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+const { Comment, User } = require('../models');
 
 // GET a single comment by ID
 router.get('/:id', async (req, res) => {

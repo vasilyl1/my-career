@@ -31,6 +31,11 @@ Goal.init(
         unique: false
       },
     },
+    advice: {
+      type: DataTypes.BOOLEAN,
+      allowNull:false,
+      default: false
+    }
     
   },
   {
