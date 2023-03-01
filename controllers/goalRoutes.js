@@ -1,21 +1,27 @@
 const router = require('express').Router();
-const { Goal } = require('../models');
+const { Goal, Comment, User } = require('../models');
 
-// GET all goals for the selected user
-router.get('/userdashboard', async (req, res) => {
+// GET all goals for the logged in user
+router.get('/user', async (req, res) => {
   try {
     const goalData = await Goal.findAll({
       include: [
         {
           model: Comment
+        },
+        {
+          model: User
         }
       ],
       where: {
-        user_id: req.session.user_id,
+        //user_id: req.session.user_id,    commented out for testing purposes
+        user_id: 1
       }
     });
     const goals = goalData.map((goal) =>
       goal.get({ plain: true }));
+      console.log(goals);
+      console.log(req.session.loggedIn);
     res.render('userdashboard', { // render handlebar view to display all goals by selected user
       goals,
       loggedIn: req.session.loggedIn
@@ -28,7 +34,7 @@ router.get('/userdashboard', async (req, res) => {
 });
 
 // GET all goals for the selected user - advisor
-router.get('/advisordashboard', async (req, res) => {
+router.get('/advisor', async (req, res) => {
   try {
     const goalData = await Goal.findAll({
       include: [
@@ -37,8 +43,7 @@ router.get('/advisordashboard', async (req, res) => {
         }
       ],
       where: {
-        user_id: req.session.user_id,
-        advice: true
+        advice: req.session.user_id // get the goals assigned for this advisor only
       }
     });
     const goals = goalData.map((goal) =>
@@ -55,7 +60,7 @@ router.get('/advisordashboard', async (req, res) => {
 });
 
 // GET a single goal by user ID
-router.get('/goal:id', async (req, res) => {
+router.get('/goal/:id', async (req, res) => {
   try {
     const goalData = await Goal.findByPk(req.params.id, {
       include: [
@@ -81,7 +86,7 @@ router.get('/goal:id', async (req, res) => {
   }
 });
 
-// Create(POST) a new goal
+// Create a new goal - user
 router.post('/goal', async (req, res) => {
   try {
     req.body.user_id = req.session.user_id;
@@ -96,41 +101,28 @@ router.post('/goal', async (req, res) => {
 });
 
 // Update(PUT) a goal
-router.put('/goal:id', async (req, res) => {
+router.put('/goal/:id', async (req, res) => {
   try {
-    let goalData = await Goal.update(req.body, {
+    const goalData = await Goal.update(req.body, {
       where: {
         id: req.params.id,
       },
     });
-    if (!goalData[0]) {
+    if (!goalData) {
       res.status(404).json({ message: 'No goal found with this id!' });
       return;
     }
-    goalData = await Goal.findAll({
-      include: [
-        {
-          model: Comment,
-        }
-      ],
-      where: {
-        user_id: req.session.user_id,
-      },
-    });
-    const goals = goalData.map((goal) =>
-      goal.get({ plain: true })
-    );
-    res.render('userdashboard', {
-      goals,
-      loggedIn: req.session.loggedIn,
-    });
+    const goal = goalData.get({ plain: true });
+    res.render('goal', { goal, loggedIn: req.session.loggedIn });
+    
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+
 // DELETE a goal
-router.delete('/goal:id', async (req, res) => {
+router.delete('/goal/:id', async (req, res) => {
   try {
     const goalData = await Goal.destroy({
       where: {

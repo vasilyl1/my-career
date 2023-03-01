@@ -32,9 +32,10 @@ Goal.init(
       },
     },
     advice: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull:false,
-      default: false
+      defaultValue: 0,
+      unique: false
     }
     
   },
