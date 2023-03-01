@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Goal } = require('../models');
+const { Goal, Comment } = require('../models');
 
 // GET all goals for the selected user
 router.get('/userdashboard', async (req, res) => {
