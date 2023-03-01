@@ -1,24 +1,86 @@
 const router = require('express').Router();
 const { Goal } = require('../models');
 
-// GET all goals
-router.get('/', async (req, res) => {
+// GET all goals for the selected user
+router.get('/userdashboard', async (req, res) => {
   try {
-    const goalData = await Goal.findAll();
-    res.status(200).json(goalData);
+    const goalData = await Goal.findAll({
+      include: [
+        {
+          model: Comment
+        },
+        {
+          model: User
+        }
+      ],
+      where: {
+        user_id: req.session.user_id,
+      }
+    });
+    const goals = goalData.map((goal) =>
+      goal.get({ plain: true }));
+    res.render('userdashboard', { // render handlebar view to display all goals by selected user
+      goals,
+      loggedIn: req.session.loggedIn
+    });
+    //res.status(200).json(commentsData);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
 
-// GET a single goal by ID
-router.get('/:id', async (req, res) => {
+// GET all goals for the selected user - advisor
+router.get('/advisordashboard', async (req, res) => {
   try {
-    const goalData = await Goal.findByPk(req.params.id);
+    const goalData = await Goal.findAll({
+      include: [
+        {
+          model: Comment
+        },
+        {
+          model: User
+        }
+      ],
+      where: {
+        user_id: req.session.user_id,
+        advice: true
+      }
+    });
+    const goals = goalData.map((goal) =>
+      goal.get({ plain: true }));
+    res.render('advisordashboard', { // render handlebar view to display all goals by selected user - advisor
+      goals,
+      loggedIn: req.session.loggedIn
+    });
+    //res.status(200).json(commentsData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// GET a single goal by user ID
+router.get('/goal:id', async (req, res) => {
+  try {
+    const goalData = await Goal.findByPk(req.params.id, {
+      include: [
+        {
+          model: Comment
+        }
+      ],
+      where: {
+        user_id: req.session.user_id
+      }
+    }
+    );
     if (!goalData) {
       res.status(404).json({ message: 'No goal found with this id!' });
       return;
     }
+    const goal = goalData.get({plain: true});
+    res.render('goal', { goal, loggedIn: req.session.loggedIn });
+
     res.status(200).json(goalData);
   } catch (err) {
     res.status(500).json(err);
@@ -26,19 +88,23 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create(POST) a new goal
-router.post('/', async (req, res) => {
+router.post('/goal', async (req, res) => {
   try {
+    req.body.user_id = req.session.user_id;
     const goalData = await Goal.create(req.body);
-    res.status(200).json(goalData);
+    const goal = goalData.get({ plain: true });
+    res.render('goal', { goal, loggedIn: req.session.loggedIn });
+
   } catch (err) {
-    res.status(400).json(err);
+    console.log(err);
+    res.status(500).json(err);
   }
 });
 
 // Update(PUT) a goal
-router.put('/:id', async (req, res) => {
+router.put('/goal:id', async (req, res) => {
   try {
-    const goalData = await Goal.update(req.body, {
+    let goalData = await Goal.update(req.body, {
       where: {
         id: req.params.id,
       },
@@ -47,14 +113,30 @@ router.put('/:id', async (req, res) => {
       res.status(404).json({ message: 'No goal found with this id!' });
       return;
     }
-    res.status(200).json(goalData);
+    goalData = await Goal.findAll({
+      include: [
+        {
+          model: Comment,
+        }
+      ],
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
+    const goals = goalData.map((goal) =>
+      goal.get({ plain: true })
+    );
+    res.render('userdashboard', {
+      goals,
+      loggedIn: req.session.loggedIn,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 // DELETE a goal
-router.delete('/:id', async (req, res) => {
+router.delete('/goal:id', async (req, res) => {
   try {
     const goalData = await Goal.destroy({
       where: {
@@ -65,7 +147,23 @@ router.delete('/:id', async (req, res) => {
       res.status(404).json({ message: 'No goal found with this id!' });
       return;
     }
-    res.status(200).json(goalData);
+    goalData = await Goal.findAll({
+      include: [
+        {
+          model: Comment,
+        }
+      ],
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
+    const goals = goalData.map((goal) =>
+      goal.get({ plain: true })
+    );
+    res.render('userdashboard', {
+      goals,
+      loggedIn: req.session.loggedIn,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
