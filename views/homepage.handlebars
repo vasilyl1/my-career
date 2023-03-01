@@ -1,2 +1,9 @@
 {{#if logged_in}}
- {{{userDashboard}}}
+
+  {{#include userDashboard}}
+
+{{else}}
+
+  {{#include login}}
+
+{{/if}}
