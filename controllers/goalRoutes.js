@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const botResponse = require('../utils/chatBots');
 const { Goal, User, Comment } = require('../models');
+const { ensureAuthentication } = require('../config/passport');
 
 // GET all goals for the logged in user
-router.get('/user', async (req, res) => {
+router.get('/goals', ensureAuthentication, async (req, res) => {
   try {
     const goalData = await Goal.findAll({
       include: [
@@ -18,14 +19,8 @@ router.get('/user', async (req, res) => {
         user_id: 1
       }
     });
-    const goals = goalData.map((goal) =>
-      goal.get({ plain: true }));
-      console.log(goals);
-    res.render('userDashboard', { // render handlebar view to display all goals by selected user
-      goals,
-      loggedIn: req.session.loggedIn
-    });
-    //res.status(200).json(commentsData);
+    const goals = goalData.map((goal) => goal.get({ plain: true }));
+    res.render('userdashboard', { goals, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -33,25 +28,24 @@ router.get('/user', async (req, res) => {
 });
 
 // GET all goals for the selected user - advisor
-router.get('/advisor', async (req, res) => {
+router.get('/advisor', ensureAuthentication, async (req, res) => {
   try {
     const goalData = await Goal.findAll({
       include: [
         {
-          model: Comment
-        }
+          model: Comment,
+        },
       ],
       where: {
-        advice: req.session.user_id // get the goals assigned for this advisor only
-      }
+        advice: req.session.user_id, // get the goals assigned for this advisor only
+      },
     });
-    const goals = goalData.map((goal) =>
-      goal.get({ plain: true }));
-    res.render('advisorDashboard', { // render handlebar view to display all goals by selected user - advisor
+    const goals = goalData.map((goal) => goal.get({ plain: true }));
+    res.render('advisorDashboard', {
       goals,
-      loggedIn: req.session.loggedIn
+      loggedIn: req.session.loggedIn,
     });
-    //res.status(200).json(commentsData);
+    //res.status(200).json(goalsData);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -59,7 +53,7 @@ router.get('/advisor', async (req, res) => {
 });
 
 // GET a single goal by user ID
-router.get('/goal/:id', async (req, res) => {
+router.get('/goal/:id', ensureAuthentication, async (req, res) => {
   try {
     console.log(`parameter ${req.params.id}`);
     const goalData = await Goal.findByPk(req.params.id, {
@@ -75,6 +69,10 @@ router.get('/goal/:id', async (req, res) => {
       }
     }
     );
+    if (!goalData) {
+      res.status(404).json({ message: 'No goal found with this ID' });
+      return;
+    }
     const goal = goalData.get({plain: true});
 
     // this is the test for AI here
@@ -89,8 +87,8 @@ router.get('/goal/:id', async (req, res) => {
   }
 });
 
-// Create a new goal - user
-router.post('/goal', async (req, res) => {
+// Create(POST) a new goal - user
+router.post('/goal', ensureAuthentication, async (req, res) => {
   try {
     req.body.user_id = req.session.user_id;
     const goalData = await Goal.create(req.body);
@@ -103,8 +101,8 @@ router.post('/goal', async (req, res) => {
   }
 });
 
-// Update(PUT) a goal
-router.put('/goal/:id', async (req, res) => {
+// Update(PUT) a goal by ID
+router.put('/goal/:id', ensureAuthentication, async (req, res) => {
   try {
     const goalData = await Goal.update(req.body, {
       where: {
@@ -124,8 +122,8 @@ router.put('/goal/:id', async (req, res) => {
 });
 
 
-// DELETE a goal
-router.delete('/goal/:id', async (req, res) => {
+// DELETE a goal by ID
+router.delete('/goal/:id', ensureAuthentication, async (req, res) => {
   try {
     const goalData = await Goal.destroy({
       where: {
@@ -146,14 +144,10 @@ router.delete('/goal/:id', async (req, res) => {
         user_id: req.session.user_id,
       },
     });
-    const goals = goalData.map((goal) =>
-      goal.get({ plain: true })
-    );
-    res.render('userDashboard', {
-      goals,
-      loggedIn: req.session.loggedIn,
-    });
+    const goals = goalDataAll.map((goal) => goal.get({ plain: true }));
+    res.render('userdashboard', { goals, loggedIn: req.session.loggedIn });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
