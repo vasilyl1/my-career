@@ -9,27 +9,27 @@ Goal.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     body: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     date: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: false
     },
-    user_id: {
+    userId: {
       type: DataTypes.INTEGER,
       references: {
         model: 'user',
         key: 'id',
         unique: false
-      },
+      }
     },
     advice: {
       type: DataTypes.INTEGER,
@@ -37,13 +37,12 @@ Goal.init(
       defaultValue: 0,
       unique: false
     }
-    
   },
   {
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'goal',
+    modelName: 'goal'
   }
 );
 

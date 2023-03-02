@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const { User } = require('../models');
 
 //exports function which will be called in the server.js file (**ACTION ITEM**)
-module.exports = function(passport) {}
+module.exports = function(passport) {};
 
 // Define passport middleware
 passport.use(new LocalStrategy(
@@ -28,23 +28,23 @@ passport.use(new LocalStrategy(
   }
 ));
 
-  // Serialize the user for the session
-  //Stores the User ID in the session - Used to retrieve subsequent requests to authenticate User
-  passport.serializeUser((user, done) => {
-    done(null, user.id);
-  });
+// Serialize the user for the session
+//Stores the User ID in the session - Used to retrieve subsequent requests to authenticate User
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
 
-  // Deserialize the user for the session
-  //Purpose is to retrieve the User ID saved from the session and then used to authentication
-  passport.deserializeUser(async (id, done) => {
-    try {
-      const user = await User.findByPk(id);
-      done(null, user);
-    } catch (err) {
-      done(err);
-    }
-  });
-  
+// Deserialize the user for the session
+//Purpose is to retrieve the User ID saved from the session and then used to authentication
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findByPk(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
+
 // Define ensureAuthentication middleware
 const ensureAuthentication = (req, res, next) => {
   if (req.isAuthenticated()) {
