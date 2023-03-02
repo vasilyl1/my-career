@@ -1,5 +1,10 @@
 const { Configuration, OpenAIApi } = require("openai");
   
+
+// this is how to request this from the front end JavaScript
+// const botResponse = require('../utils/chatBots');
+// const testResponse = await botResponse(`Provide 3 most important items on how can I achieve my development goal named as: ${goal.name}`);
+//
 const configuration = new Configuration({
     apiKey: process.env.openAI,
   });
