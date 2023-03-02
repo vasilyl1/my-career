@@ -21,6 +21,7 @@ router.get('/user', ensureAuthentication, async (req, res) => {
     });
     const goals = goalData.map((goal) => goal.get({ plain: true }));
     res.render('userdashboard', { goals, loggedIn: req.session.loggedIn });
+    res.status(200).json(goalData);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -45,7 +46,7 @@ router.get('/advisor', ensureAuthentication, async (req, res) => {
       goals,
       loggedIn: req.session.loggedIn,
     });
-    //res.status(200).json(goalsData);
+    res.status(200).json(goalData);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -80,7 +81,7 @@ router.get('/goal/:id', ensureAuthentication, async (req, res) => {
     console.log(goal.name);
     console.log(testResponse);
     res.render('goal', { goal, loggedIn: req.session.loggedIn });
-    //res.status(200).json(goalData);
+    res.status(200).json(goalData);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -94,7 +95,7 @@ router.post('/goal', ensureAuthentication, async (req, res) => {
     const goalData = await Goal.create(req.body);
     const goal = goalData.get({ plain: true });
     res.render('goal', { goal, loggedIn: req.session.loggedIn });
-
+    res.status(200).json(goalData);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -115,7 +116,7 @@ router.put('/goal/:id', ensureAuthentication, async (req, res) => {
     }
     const goal = goalData.get({ plain: true });
     res.render('goal', { goal, loggedIn: req.session.loggedIn });
-    
+    res.status(200).json(goalData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -146,6 +147,7 @@ router.delete('/goal/:id', ensureAuthentication, async (req, res) => {
     });
     const goals = goalDataAll.map((goal) => goal.get({ plain: true }));
     res.render('userdashboard', { goals, loggedIn: req.session.loggedIn });
+    res.status(200).json('delete success');
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
