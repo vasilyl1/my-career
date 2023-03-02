@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const chatBot = require('../utils/chatBots');
 const { Goal, User, Comment } = require('../models');
 
 // GET all goals for the logged in user
@@ -14,7 +15,7 @@ router.get('/user', async (req, res) => {
         }
       ],
       where: {
-        user_id: req.session.user_id
+        user_id: 1
       }
     });
     const goals = goalData.map((goal) =>
@@ -67,18 +68,25 @@ router.get('/goal/:id', async (req, res) => {
         }
       ],
       where: {
-        user_id: req.session.user_id
+        //user_id: req.session.user_id
+        //pre-defined user before the authorization is implemented
+        user_id:1
       }
     }
     );
-    if (!goalData) {
-      res.status(404).json({ message: 'No goal found with this id!' });
-      return;
-    }
     const goal = goalData.get({plain: true});
-    res.render('goal', { goal, loggedIn: req.session.loggedIn });
+    console.log(`this is debug for goal data ${goal.name}`);
+    //if (!goal.id) {
+    //  res.status(404).json({ message: 'No goal found with this id!' });
+    //  return;
+    //}
+    //const goal = goalData.get({plain: true});
 
-    res.status(200).json(goalData);
+    // this is the test for AI here
+    const botResponse = await chatBot(`Please provide one expert advise for my development goal named as: ${goal.name}`);
+    console.log(goal.name);
+    console.log(botResponse);
+    res.render('goal', { goal, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
