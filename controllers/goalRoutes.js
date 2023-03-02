@@ -145,7 +145,7 @@ router.delete('/goal/:id', ensureAuthentication, async (req, res) => {
         user_id: req.session.user_id,
       },
     });
-    const goals = goalDataAll.map((goal) => goal.get({ plain: true }));
+    const goals = goalData.map((goal) => goal.get({ plain: true }));
     res.render('userdashboard', { goals, loggedIn: req.session.loggedIn });
     res.status(200).json('delete success');
   } catch (err) {
