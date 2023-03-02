@@ -4,7 +4,7 @@ const { Goal, User, Comment } = require('../models');
 const { ensureAuthentication } = require('../config/passport');
 
 // GET all goals for the logged in user
-router.get('/goals', ensureAuthentication, async (req, res) => {
+router.get('/user', ensureAuthentication, async (req, res) => {
   try {
     const goalData = await Goal.findAll({
       include: [
@@ -16,7 +16,7 @@ router.get('/goals', ensureAuthentication, async (req, res) => {
         }
       ],
       where: {
-        user_id: 1
+        user_id: req.session.user_id
       }
     });
     const goals = goalData.map((goal) => goal.get({ plain: true }));

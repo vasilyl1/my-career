@@ -14,7 +14,7 @@ const seedUser = async () => {
         advisor: true,
     });
     await User.create({ // using create method instead of bulkcreate to launch the hooks for encryption
-        username: 'Chat GPT Bot',
+        username: 'text-davinci-003',
         email: 'abc2@abc.com',
         password: 'password123',
         advisor: true,
