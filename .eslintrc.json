@@ -4,15 +4,18 @@
     "browser": true,
     "commonjs": true,
     "node": true,
+    "jquery": true,
     "es6": true,
     "es2017": true,
-    "es2018": true
+    "es2018": true,
+    "es2020": true
   },
   "rules": {
     "semi": ["error", "always"],
     "quotes": ["error", "single"],
     "vars-on-top": "error",
     "no-trailing-spaces": "error",
+    "no-inline-config": "error",
     "no-mixed-spaces-and-tabs": "error",
     "comma-dangle": ["error", "never"],
     "no-redeclare": "error",
@@ -23,8 +26,8 @@
     "yoda": ["error", "never", { "exceptRange": true }],
     "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0 }],
     "no-multi-spaces": ["error", { "ignoreEOLComments": false }],
-    "arrow-spacing": "error",
-    "template-curly-spacing": ["error", "always"]
+    "template-curly-spacing": ["error", "always"],
+    "arrow-spacing": "error"
   },
   "extends": []
 }
