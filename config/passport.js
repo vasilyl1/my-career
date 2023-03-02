@@ -1,40 +1,32 @@
 //Authentication Middleware
 const passport = require('passport');
-//AUthenticate Users by Username and Password
+//Authenticate Users by Username and Password
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const { User } = require('../models');
 
 //exports function which will be called in the server.js file (**ACTION ITEM**)
-module.exports = function(passport) {
-  // Use a local strategy
-  passport.use(
-    new LocalStrategy(
-      { usernameField: 'email' },  //Email field to be used as Username filed for authentication
-      async (email, password, done) => {  //authentication function to be called when User Logs In
-        try {  //try block to handle any errors
-          // Find the user associated with the email
-          const user = await User.findOne({ where: { email: email } });
+module.exports = function(passport) {}
 
-          if (!user) {
-            return done(null, false, { message: 'Incorrect email or password.' });
-          }
-
-          // Compare the supplied password with the hashed password
-          const isMatch = await bcrypt.compare(password, user.password);
-
-          if (!isMatch) {
-            return done(null, false, { message: 'Incorrect email or password.' });
-          }
-
-          // If the password matches, return the user object
-          return done(null, user);
-        } catch (err) {
-          return done(err);
-        }
+// Define passport middleware
+passport.use(new LocalStrategy(
+  { usernameField: 'email' },
+  async (email, password, done) => {
+    try {
+      const user = await User.findOne({ where: { email } });
+      if (!user) {
+        return done(null, false, { message: 'Incorrect email or password.' });
       }
-    )
-  );
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return done(null, false, { message: 'Incorrect email or password.' });
+      }
+      return done(null, user);
+    } catch (err) {
+      return done(err);
+    }
+  }
+));
 
   // Serialize the user for the session
   //Stores the User ID in the session - Used to retrieve subsequent requests to authenticate User
@@ -52,4 +44,14 @@ module.exports = function(passport) {
       done(err);
     }
   });
+  
+// Define ensureAuthentication middleware
+const ensureAuthentication = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
 };
+
+// Export ensureAuthentication function
+module.exports = { ensureAuthentication };
