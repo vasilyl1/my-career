@@ -18,7 +18,7 @@
     "no-mixed-spaces-and-tabs": "error",
     "comma-dangle": ["error", "never"],
     "no-redeclare": "error",
-    "indent": ["error", 1],
+    "indent": ["error", 2],
     "camelcase": ["error", { "ignoreDestructuring": true, "properties": "always" }],
     "eqeqeq": ["error", "smart"],
     "no-alert": "error",
