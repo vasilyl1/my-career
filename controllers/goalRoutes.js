@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Goal } = require('../models');
+const { Goal, User, Comment } = require('../models');
 
 // GET all goals for the logged in user
 router.get('/user', async (req, res) => {
@@ -19,6 +19,7 @@ router.get('/user', async (req, res) => {
     });
     const goals = goalData.map((goal) =>
       goal.get({ plain: true }));
+      console.log(goals);
     res.render('userDashboard', { // render handlebar view to display all goals by selected user
       goals,
       loggedIn: req.session.loggedIn
