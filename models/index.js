@@ -3,27 +3,27 @@ const Goal = require('./Goal');
 const Comment = require('./Comment');
 
 Goal.hasMany(Comment, {
-  foreignKey: 'goal_id'
+  foreignKey: 'goalId'
 });
 
 Comment.belongsTo(Goal, {
-  foreignKey: 'goal_id'
+  foreignKey: 'goalId'
 });
 
 User.hasMany(Comment, {
-  foreignKey: 'user_id'
+  foreignKey: 'userId'
 });
 
 Comment.belongsTo(User, {
-  foreignKey: 'user_id'
+  foreignKey: 'userId'
 });
 
 User.hasMany(Goal, {
-  foreignKey: 'user_id'
+  foreignKey: 'userId'
 });
 
 Goal.belongsTo(User, {
-  foreignKey: 'user_id'
+  foreignKey: 'userId'
 });
 
 module.exports = { User, Goal, Comment };
