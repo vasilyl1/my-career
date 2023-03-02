@@ -29,9 +29,8 @@ const sessionOptions = {
 app.use(session(sessionOptions)); // Add session middleware
 
 const hbs = exphbs.create({ helpers }); // initialize handlebars with helpers functions
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
-//app.set('views', '/views');
+app.engine('hbs', hbs.engine);
+app.set('view engine', 'hbs');
 
 
 app.use(express.json());
