@@ -1,9 +1,9 @@
 {{#if logged_in}}
 
-  {{> userDashboard.handlebars}}
+  {{|userDashboard|}}
 
 {{else}}
 
-  {{> login.handlebars}}
+  {{|login|}}
 
 {{/if}}
