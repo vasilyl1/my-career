@@ -9,38 +9,38 @@ Comment.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     body: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     date: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: false
     },
-    goal_id: {
+    goalId: {
       type: DataTypes.INTEGER,
       references: {
         model: 'goal',
         key: 'id',
         unique: false
-      },
+      }
     },
-    user_id: {
+    userId: {
       type: DataTypes.INTEGER,
       references: {
         model: 'user',
         key: 'id',
         unique: false
-      },
-    },
+      }
+    }
   },
   {
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'comment',
+    modelName: 'comment'
   }
 );
 
