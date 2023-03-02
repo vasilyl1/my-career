@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Goal, Comment, User } = require('../models');
+const { Goal } = require('../models');
 
 // GET all goals for the logged in user
 router.get('/user', async (req, res) => {
@@ -19,7 +19,7 @@ router.get('/user', async (req, res) => {
     });
     const goals = goalData.map((goal) =>
       goal.get({ plain: true }));
-    res.render('userdashboard', { // render handlebar view to display all goals by selected user
+    res.render('userDashboard', { // render handlebar view to display all goals by selected user
       goals,
       loggedIn: req.session.loggedIn
     });
@@ -45,7 +45,7 @@ router.get('/advisor', async (req, res) => {
     });
     const goals = goalData.map((goal) =>
       goal.get({ plain: true }));
-    res.render('advisordashboard', { // render handlebar view to display all goals by selected user - advisor
+    res.render('advisorDashboard', { // render handlebar view to display all goals by selected user - advisor
       goals,
       loggedIn: req.session.loggedIn
     });
@@ -143,7 +143,7 @@ router.delete('/goal/:id', async (req, res) => {
     const goals = goalData.map((goal) =>
       goal.get({ plain: true })
     );
-    res.render('userdashboard', {
+    res.render('userDashboard', {
       goals,
       loggedIn: req.session.loggedIn,
     });

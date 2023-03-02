@@ -4,7 +4,7 @@ const session = require('express-session');
 const exphbs = require('express-handlebars');
 const SequelizeStore = require('connect-session-sequelize')(session.Store); //Session data stored in sequelize database
 
-const Controlleroute = require("./controllers/");
+const controllerRoute = require("./controllers/");
 const sequelize = require("./config/connection");
 const helpers = require('./utils/helpers');
 
@@ -25,11 +25,13 @@ const sessionOptions = {
   }),
 };
 
+
 app.use(session(sessionOptions)); // Add session middleware
 
 const hbs = exphbs.create({ helpers }); // initialize handlebars with helpers functions
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+app.set('views', '/views');
 
 
 app.use(express.json());
@@ -40,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize()); // Initialize passport
 app.use(passport.session()); // Add passport session middleware
 
-app.use(Controlleroute);
+app.use(controllerRoute);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}!`);
