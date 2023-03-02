@@ -20,7 +20,7 @@
     "comma-dangle": ["error", "never"],
     "no-redeclare": "error",
     "indent": ["error", 2],
-    "camelcase": "error",
+    "camelcase": ["error", { "ignoreDestructuring": true, "properties": "always" }],
     "eqeqeq": ["error", "smart"],
     "no-alert": "error",
     "yoda": ["error", "never", { "exceptRange": true }],

@@ -20,7 +20,7 @@ router.get('/comment/:id', ensureAuthentication, async (req, res) => {
     const comment = commentData.get({ plain: true });
     const editComment = (req.session.user_id == commentData.user_id); // check if the comment belongs to auth user
     res.render('comment', { comment, loggedIn: req.session.loggedIn, editComment: editComment });
-    res.status(200).json(commentData);
+    // res.status(200).json(commentData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -34,7 +34,7 @@ router.post('/comment', ensureAuthentication, async (req, res) => {
     const commentData = await Comment.create(req.body);
     const comment = commentData.get({ plain: true });
     res.render('comment', { comment, loggedIn: req.session.loggedIn, editComment: true });
-    res.status(200).json(commentData);
+    // res.status(200).json(commentData);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -55,7 +55,7 @@ router.put('/comment/:id', ensureAuthentication, async (req, res) => {
     }
     const comment = commentData.get({ plain: true });
     res.render('comment', { comment, loggedIn: req.session.loggedIn, editComment: true });
-    res.status(200).json(commentData);
+    // res.status(200).json(commentData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -90,7 +90,7 @@ router.delete('/comment/:id', ensureAuthentication, async (req, res) => {
       goals,
       loggedIn: req.session.loggedIn,
     });
-    res.status(200).json('comment delete success');
+    // res.status(200).json('comment delete success');
   
   } catch (err) {
     console.log(err);
