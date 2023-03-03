@@ -2,20 +2,18 @@
   
 
 <nav class="bg-gray-800">
-  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-    <div class="relative flex items-center justify-between h-full">
-      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-      </div>
-      <div class="w-full flex justify-around items-center sm:items-stretch sm:justify-start">
+  <div class="px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-full">
+      <div class="flex w-full sm:items-stretch sm:justify-start">
         {{!-- <div class="flex flex-shrink-0 items-center">
           <img class="block h-8 w-auto lg:hidden" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
           <img class="hidden h-8 w-auto lg:block" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
         </div> --}}
-        <div class="hidden sm:ml-6 sm:block">
-          <div class="flex space-x-4 items-center">
+        <div class="flex w-full sm:block">
+          <div class="flex space-x-4 items-center justify-between">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a href="/">
-              <h1 class='text-white px-3 py-2 text-xl font-medium text-center'>My Career!</h1>
+              <h1 class='text-white px-3 py-3 text-5xl font-medium text-center'>My Career!</h1>
             </a>
             <!-- Conditionally render login or logout links -->
             {{#if logged_in}}
