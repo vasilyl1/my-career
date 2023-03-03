@@ -23,7 +23,7 @@ header, .project:not(:last-child) {
   margin-left: -5px;
 }
 
-.overflow-y-auto::-webkit-scrollbar,
-.overflow-x-auto::-webkit-scrollbar {
+::-webkit-scrollbar {
   display: none;
 }
+

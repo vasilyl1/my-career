@@ -1,13 +1,17 @@
-<ul class="list-none h-48 appearance-none overflow-y-auto hover:scroll-auto">
+<ul 
+id='scrollable-window'
+style="height: 75vh; overflow: scroll;" class="list-none appearance-none whitespace-nowrap">
   {{#each goals as |goal|}}
-    <li class="py-2">
-      <ul class='container'>
-        <div class='flex flex-row'>
-          {{goal.name}}
-          {{goal.date}}
+    <div>
+      <li class="my-2 border border-zinc-600 rounded-md p-2">
+        <div class='container flex flex-col max-w-full'>
+          <p class='flex self-end text-slate-400'>{{formatDate goal.date}}</p>
+          <h3 class='text-2xl'>{{goal.name}}</h3>
+          <br>
+          <p>{{goal.body}}</p>
+          <br>
         </div>
-        <p>{{goal.body}}</p>
-      </ul>
-    </li>
+      </li>
+    </div>
   {{/each}}
 </ul>

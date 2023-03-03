@@ -1,0 +1,14 @@
+{{#each goals as |goal|}}
+  <a href="{{> userGoal}}">
+    <li class="py-2">
+      <ul class='container'>
+        <div class='flex flex-row'>
+          <h3>{{goal.name}}</h3>
+          <p>Due:</p>
+          {{formatDate goal.date}}
+        </div>
+        <p>{{goal.body}}</p>
+      </ul>
+    </li>
+  </a>
+{{/each}}
