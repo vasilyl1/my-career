@@ -85,7 +85,20 @@ router.get('/goal/:id', ensureAuthentication, async (req, res) => {
     }
     const goal = goalData.get({ plain: true });
 
-    res.render('goal', { goal, loggedIn: req.session.loggedIn });
+    const advisorsData = await User.findAll({
+      where: {
+        advisor: true
+      }
+    });
+
+    const advisors = advisorsData.map((goal) => { // list of advisors array
+      var newGoal = goal.get({ plain: true });
+      return newGoal;
+    });
+
+    // please use advisors[i].id and advisors[i].name as the advisor id and name - loop through an array
+
+    res.render('goal', { goal, loggedIn: req.session.loggedIn, advisors: advisors });
 
   } catch (err) {
     console.log(err);
