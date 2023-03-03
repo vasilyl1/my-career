@@ -30,7 +30,21 @@ const goaldata = [
     name: 'personal objective 1 - acquire full stack developer skills',
     body: 'Attend UofT bootcamp, make sure you ask many questions to the instructor, TAs and tutors ',
     date: 'December 01, 2022 09:00:00',
+    userId: 1,
+    advice: 2 // requested advisor 2 review
+  },
+  {
+    name: 'personal objective 1 - acquire full stack developer skills',
+    body: 'Attend UofT bootcamp, make sure you ask many questions to the instructor, TAs and tutors ',
+    date: 'December 01, 2022 09:00:00',
     userId: 1
+  },
+  {
+    name: 'personal objective 1 - acquire full stack developer skills',
+    body: 'Attend UofT bootcamp, make sure you ask many questions to the instructor, TAs and tutors ',
+    date: 'December 01, 2022 09:00:00',
+    userId: 1,
+    advice: 2 // requested advisor 2 review
   },
   {
     name: 'personal objective 1 - acquire full stack developer skills',
@@ -48,7 +62,8 @@ const goaldata = [
     name: 'personal objective 1 - acquire full stack developer skills',
     body: 'Attend UofT bootcamp, make sure you ask many questions to the instructor, TAs and tutors ',
     date: 'December 01, 2022 09:00:00',
-    userId: 1
+    userId: 1,
+    advice: 2 // requested advisor 2 review
   },
   {
     name: 'personal objective 1 - acquire full stack developer skills',
@@ -60,7 +75,8 @@ const goaldata = [
     name: 'personal objective 1 - acquire full stack developer skills',
     body: 'Attend UofT bootcamp, make sure you ask many questions to the instructor, TAs and tutors ',
     date: 'December 01, 2022 09:00:00',
-    userId: 1
+    userId: 1,
+    advice: 2 // requested advisor 2 review
   },
   {
     name: 'personal objective 1 - acquire full stack developer skills',
@@ -72,19 +88,8 @@ const goaldata = [
     name: 'personal objective 1 - acquire full stack developer skills',
     body: 'Attend UofT bootcamp, make sure you ask many questions to the instructor, TAs and tutors ',
     date: 'December 01, 2022 09:00:00',
-    userId: 1
-  },
-  {
-    name: 'personal objective 1 - acquire full stack developer skills',
-    body: 'Attend UofT bootcamp, make sure you ask many questions to the instructor, TAs and tutors ',
-    date: 'December 01, 2022 09:00:00',
-    userId: 1
-  },
-  {
-    name: 'personal objective 1 - acquire full stack developer skills',
-    body: 'Attend UofT bootcamp, make sure you ask many questions to the instructor, TAs and tutors ',
-    date: 'December 01, 2022 09:00:00',
-    userId: 1
+    userId: 1,
+    advice: 2 // requested advisor 2 review
   },
   {
     name: 'personal objective 1 - acquire full stack developer skills',

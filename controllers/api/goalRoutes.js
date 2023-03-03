@@ -2,6 +2,57 @@ const router = require('express').Router();
 const { Goal } = require('../../models');
 const { ensureAuthentication } = require('../../config/passport');
 
+/* // GET all goals
+router.get('/goals', ensureAuthentication, async (req, res) => {
+  try {
+    if (req.session.loggedIn) {
+      res.redirect('/login');
+      return;
+    }
+
+    let goalData;
+
+    if (req.session.advisor) { //SQL for all goals for advisory review
+      goalData = await Goal.findAll({
+        include: [
+          {
+            model: Comment
+          },
+          {
+            model: User
+          }
+        ],
+        where: {
+          advisor: req.session.user_id
+        }
+      });
+    } else { //SQL for all goals for the user
+      goalData = await Goal.findAll({
+        include: [
+          {
+            model: Comment
+          },
+          {
+            model: User
+          }
+        ],
+        where: {
+          userId: 1 // req.session.user_id
+        }
+      });
+    }
+
+    const goals = goalData.map((goal) => {
+      var newGoal = goal.get({ plain: true });
+      delete newGoal.user.password;
+      return newGoal;
+    });
+    res.json({ goals, loggedIn: req.session.loggedIn });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+}); */
 
 // Create(POST) a new goal
 router.post('/goal', ensureAuthentication, async (req, res) => {

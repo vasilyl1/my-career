@@ -30,7 +30,7 @@ THEN I’d like to have an ability to get the AI comment for my objectives.
 
 
 ## Deployment Link 🔗
-[Deployment link]()<br>
+[Deployment link](https://my-career.herokuapp.com/)<br>
 
 [Repo link](https://github.com/vasilyl1/team-project)<br>
 

@@ -1,18 +1,17 @@
-$(function() {
-  $( '#newGoalDate' ).datepicker();
-});
-
-$(function() {
-  $('#newGoal').click(function() {
+$(async function() {
+  $('#newGoalBtn').click(() => {
     $('#scrollable-window').hide();
-    $('#newGoal').hide();
+    $('#newGoalBtn').hide();
     $('#createGoalContainer').show();
   });
-  $('#create').click(function() {
+  $('#createGoalBtn').click(() => {
     $('#createGoalContainer').hide();
     $('#scrollable-window').show();
-    $('#newGoal').show();
+    $('#newGoalBtn').show();
   });
-});
 
-$('#createGoalContainer').hide();
+  $('#createGoalContainer').hide();
+  $( '#newGoalDate' ).datepicker();
+  // const goalIds = await fetch('/api/goals').then(res => res.json()).then(data => data.map(goal => goal._id));
+  // console.log(goalIds);
+});
