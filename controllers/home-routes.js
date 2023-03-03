@@ -114,20 +114,27 @@ router.get('/comment/:id', ensureAuthentication, async (req, res) => {
   }
 });
 
-// authenticate the user
+// Login Route
 router.get('/login', async (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect('/login');
+    res.redirect('/dashboard');
     return;
   }
 
-  await res.render('login');
+  await res.render('login');  
 });
 
-// logout the user
+//POST Route for login page using passport to autheticate user
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/dashboard',  //If user successful, redirected to the dashboard
+  failureRedirect: '/login', //If user fails authentication, redirected back to the login page
+}));
+
+// Logout Route
 router.get('/logout', (req, res) => {
-  req.logout();
-  // req.session.destroy();
-  res.redirect('/login');
+  req.logout();  //provided by passport.js to remove user property and clear users session
+  req.session.destroy();
+  res.redirect('/login'); //redirects user back to login page
 });
+
 module.exports = router;

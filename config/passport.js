@@ -29,16 +29,23 @@ passport.use(new LocalStrategy(
 ));
 
 // Serialize the user for the session
-//Stores the User ID in the session - Used to retrieve subsequent requests to authenticate User
+//To store both the user ID and the advisor ID in the session
+//Check if user is an advisor and if so, store their own User ID as the Advisor ID - If not, null as advisor
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, { userId: user.id, advisorId: user.advisor ? user.id : null });  
 });
 
 // Deserialize the user for the session
-//Purpose is to retrieve the User ID saved from the session and then used to authentication
-passport.deserializeUser(async (id, done) => {
+//To retrieve both IDs from the session when deserializing the user
+//Retreiving the user from the database based on their ID
+passport.deserializeUser(async (sessionData, done) => {
   try {
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(sessionData.userId);
+    if (!user) {
+      return done(null, false);
+    }
+    // Add the advisorId property to the user object
+    user.advisorId = sessionData.advisorId;
     done(null, user);
   } catch (err) {
     done(err);
