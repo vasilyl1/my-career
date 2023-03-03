@@ -32,7 +32,7 @@ passport.use(new LocalStrategy(
 //To store both the user ID and the advisor ID in the session
 //Check if user is an advisor and if so, store their own User ID as the Advisor ID - If not, null as advisor
 passport.serializeUser((user, done) => {
-  done(null, { userId: user.id, advisorId: user.advisor ? user.id : null });  
+  done(null, { userId: user.id, advisorId: user.advisor ? user.id : null });
 });
 
 // Deserialize the user for the session
