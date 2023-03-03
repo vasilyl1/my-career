@@ -1,0 +1,13 @@
+<ul class="list-none h-48 appearance-none overflow-y-auto hover:scroll-auto">
+  {{#each goals as |goal|}}
+    <li class="py-2">
+      <ul class='container'>
+        <div class='flex flex-row'>
+          {{goal.name}}
+          {{goal.date}}
+        </div>
+        <p>{{goal.body}}</p>
+      </ul>
+    </li>
+  {{/each}}
+</ul>

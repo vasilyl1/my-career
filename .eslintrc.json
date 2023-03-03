@@ -27,6 +27,5 @@
     "no-multi-spaces": ["error", { "ignoreEOLComments": false }],
     "template-curly-spacing": ["error", "always"],
     "arrow-spacing": "error"
-  },
-  "extends": []
+  }
 }
