@@ -6,23 +6,26 @@
     <div class="relative flex items-center justify-between h-full">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
       </div>
-      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+      <div class="w-full flex justify-around items-center sm:items-stretch sm:justify-start">
         {{!-- <div class="flex flex-shrink-0 items-center">
           <img class="block h-8 w-auto lg:hidden" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
           <img class="hidden h-8 w-auto lg:block" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
         </div> --}}
         <div class="hidden sm:ml-6 sm:block">
-          <div class="flex space-x-4">
+          <div class="flex space-x-4 items-center">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a href="/">
-              <h1 class='bg-gray-900 text-white px-3 py-2 text-sm font-medium'>My Career!</h1>
+              <h1 class='text-white px-3 py-2 text-xl font-medium text-center'>My Career!</h1>
             </a>
             <!-- Conditionally render login or logout links -->
             {{#if logged_in}}
-            <button class="no-button bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" id="logout">Logout</button>
+            <h1></h1>
+            <button class="no-button text-white rounded-md px-3 py-2 text-sm font-medium hover:no-underline hover:text-white 
+              hover:bg-gray-600" id="logout">Logout</button>
             {{else}}
             <a href="/login">
-              <button class="no-button bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" id="login">Login</button>
+              <button class="no-button bg-gray-700 text-white rounded-md px-3 py-2 my-2 text-sm font-medium hover:no-underline hover:text-white 
+              hover:bg-gray-600" id="login">Login</button>
             </a>
             {{/if}}
 
@@ -42,14 +45,14 @@
     <div class="space-y-1 px-2 pt-2 pb-3">
       <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
       <a href="/">
-        <h1 class='bg-gray-900 text-white px-3 py-2 text-sm font-medium'>My Career!</h1>
+        <h1 class='text-white px-3 py-2 text-xl font-medium'>My Career!</h1>
       </a>
       <!-- Conditionally render login or logout links -->
       {{#if logged_in}}
       <button class="no-button text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" id="logout">Logout</button>
       {{else}}
       <a href="/login">
-        <button class="no-button text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" id="login">Login</button>
+        <button class="no-button hover:bg-gray-700 text-gray-300 hover:text-white block rounded-md px-3 py-2 text-base font-medium hover:no-underline hover:text-white hover:bg-gray-600" id="login">Login</button>
       </a>
       {{/if}}
     </div>
