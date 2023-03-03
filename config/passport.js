@@ -39,7 +39,7 @@ passport.use(new LocalStrategy(
 //To store both the user ID and the advisor ID in the session
 //Check if user is an advisor and if so, store their own User ID as the Advisor ID 
 passport.serializeUser((user, done) => {
-  done(null, { userId: user.id, advisorId: user.advisor });  
+done(null, { userId: user.id, advisorId: user.advisor });  
 });
 
 // Deserialize the user for the session
@@ -61,7 +61,7 @@ passport.deserializeUser(async (sessionData, done) => {
 
 // Define ensureAuthentication middleware
 const ensureAuthentication = (req, res, next) => {
-  if (req.isAuthenticated()) {
+  if (!req.isAuthenticated()) {
     return next();
   }
   res.redirect('/login');
