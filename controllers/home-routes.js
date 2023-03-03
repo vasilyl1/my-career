@@ -29,7 +29,7 @@ router.get('/dashboard', ensureAuthentication, async (req, res) => {
           }
         ],
         where: {
-          advice: 2 // req.session.user_id
+          advice: req.session.user_id
         }
       });
     } else { //SQL for all goals for the user
@@ -43,7 +43,7 @@ router.get('/dashboard', ensureAuthentication, async (req, res) => {
           }
         ],
         where: {
-          userId: req.session.user_id
+          userId: 1 //req.session.user_id
         }
       });
     }
