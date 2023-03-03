@@ -10,7 +10,6 @@ $(function() {
   });
   $('#create').click(function() {
     $('#createGoalContainer').hide();
-    $('#create').hide();
     $('#scrollable-window').show();
     $('#newGoal').show();
   });
