@@ -1,4 +1,4 @@
-# Project-2-Team-12
+# My Career(r) Life Cycle Management System 
 
 ## Description
 <br>
