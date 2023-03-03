@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Goal, User, Comment } = require('../models');
 const { ensureAuthentication } = require('../config/passport');
+const passport = require('passport');
 
 // home view for the user and advisor - see wireframe
 router.get('/dashboard', ensureAuthentication, async (req, res) => {
