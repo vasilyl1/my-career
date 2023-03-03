@@ -2,6 +2,10 @@ const router = require('express').Router();
 const { Goal, User, Comment } = require('../models');
 const { ensureAuthentication } = require('../config/passport');
 
+router.get('/', (req, res) => {
+  res.redirect('/dashboard');
+});
+
 // home view for the user and advisor - see wireframe
 router.get('/dashboard', ensureAuthentication, async (req, res) => {
 
@@ -11,8 +15,10 @@ router.get('/dashboard', ensureAuthentication, async (req, res) => {
       return;
     }
 
+    let goalData;
+
     if (req.session.advisor) { //SQL for all goals for advisory review
-      const goalData = await Goal.findAll({
+      goalData = await Goal.findAll({
         include: [
           {
             model: Comment
@@ -26,7 +32,7 @@ router.get('/dashboard', ensureAuthentication, async (req, res) => {
         }
       });
     } else { //SQL for all goals for the user
-      const goalData = await Goal.findAll({
+      goalData = await Goal.findAll({
         include: [
           {
             model: Comment
@@ -36,12 +42,16 @@ router.get('/dashboard', ensureAuthentication, async (req, res) => {
           }
         ],
         where: {
-          userId: req.session.user_id
+          userId: 1 // req.session.user_id
         }
       });
     }
 
-    const goals = goalData.map((goal) => goal.get({ plain: true }));
+    const goals = goalData.map((goal) => {
+      var newGoal = goal.get({ plain: true });
+      delete newGoal.user.password;
+      return newGoal;
+    });
     res.render('userdashboard', { goals, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
@@ -111,18 +121,18 @@ router.get('/login', async (req, res) => {
     return;
   }
 
-  await res.render('login');  
+  await res.render('login');
 });
 
-//POST Route for login page using passport to autheticate user
+/* //POST Route for login page using passport to autheticate user
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/dashboard',  //If user successful, redirected to the dashboard
-  failureRedirect: '/login', //If user fails authentication, redirected back to the login page
-}));
+  successRedirect: '/dashboard',//If user successful, redirected to the dashboard
+  failureRedirect: '/login' //If user fails authentication, redirected back to the login page
+})); */
 
 // Logout Route
 router.get('/logout', (req, res) => {
-  req.logout();  //provided by passport.js to remove user property and clear users session
+  req.logout();//provided by passport.js to remove user property and clear users session
   req.session.destroy();
   res.redirect('/login'); //redirects user back to login page
 });
