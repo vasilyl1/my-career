@@ -3,7 +3,7 @@ const { Goal, User, Comment } = require('../models');
 const { ensureAuthentication } = require('../config/passport');
 const passport = require('passport');
 
-router.get('/', (req, res) => {
+router.get('/',ensureAuthentication, (req, res) => {
   res.redirect('/dashboard');
 });
 
