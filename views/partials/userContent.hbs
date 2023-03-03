@@ -2,7 +2,7 @@
 id='scrollable-window'
 style="height: 75vh; overflow: scroll;" class="list-none appearance-none whitespace-nowrap">
   {{#each goals as |goal|}}
-    <div>
+    <div id='goal{{goal.id}}'>
       <li class="my-2 border border-zinc-600 rounded-md p-2">
         <div class='container flex flex-col max-w-full'>
           <p class='flex self-end text-slate-400'>{{formatDate goal.date}}</p>

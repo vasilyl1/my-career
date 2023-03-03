@@ -29,7 +29,7 @@ router.get('/dashboard', ensureAuthentication, async (req, res) => {
           }
         ],
         where: {
-          advisor: req.session.user_id
+          advice: 2 // req.session.user_id
         }
       });
     } else { //SQL for all goals for the user
@@ -43,7 +43,7 @@ router.get('/dashboard', ensureAuthentication, async (req, res) => {
           }
         ],
         where: {
-          userId: 1 // req.session.user_id
+          userId: req.session.user_id
         }
       });
     }
@@ -53,7 +53,7 @@ router.get('/dashboard', ensureAuthentication, async (req, res) => {
       delete newGoal.user.password;
       return newGoal;
     });
-    res.render('userdashboard', { goals, loggedIn: req.session.loggedIn });
+    res.render('userDashboard', { goals, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
