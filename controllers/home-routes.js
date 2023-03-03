@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Goal, User, Comment } = require('../models');
 const { ensureAuthentication } = require('../config/passport');
+const passport = require('passport');
 
 router.get('/', (req, res) => {
   res.redirect('/dashboard');
