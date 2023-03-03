@@ -53,7 +53,7 @@ router.get('/dashboard', ensureAuthentication, async (req, res) => {
       delete newGoal.user.password;
       return newGoal;
     });
-    res.render('userdashboard', { goals, loggedIn: req.session.loggedIn });
+    res.render('userDashboard', { goals, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
