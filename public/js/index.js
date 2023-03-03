@@ -3,15 +3,15 @@ $(function() {
 });
 
 $(function() {
-  $('#newGoal').click(function() {
+  $('#newGoalBtn').click(function() {
     $('#scrollable-window').hide();
-    $('#newGoal').hide();
+    $('#newGoalBtn').hide();
     $('#createGoalContainer').show();
   });
-  $('#create').click(function() {
+  $('#createGoalBtn').click(function() {
     $('#createGoalContainer').hide();
     $('#scrollable-window').show();
-    $('#newGoal').show();
+    $('#newGoalBtn').show();
   });
 });
 
