@@ -18,5 +18,5 @@ const addGoalClickHandler = async (event) => {
 
 
 document
-  .getElementById('createGoalBtn')
+  .getElementById('#newGoalBtn')
   .addEventListener('click', addGoalClickHandler); // add event listener for when the add goal button is clicked

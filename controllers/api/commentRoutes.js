@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const { Comment } = require('../../models');
-const { ensureAuthentication } = require('../../config/passport');
+const withAuth = require('../../utils/auth');
 
 // CREATE(POST) a new comment
-router.post('/comment', ensureAuthentication, async (req, res) => {
+router.post('/comment', withAuth, async (req, res) => {
   try {
     req.body.goalId = req.params.id;
     req.body.userId = req.session.user_id;
@@ -17,7 +17,7 @@ router.post('/comment', ensureAuthentication, async (req, res) => {
 });
 
 // UPDATE(PUT) a comment by ID
-router.put('/comment/:id', ensureAuthentication, async (req, res) => {
+router.put('/comment/:id', withAuth, async (req, res) => {
   try {
     const commentData = await Comment.update(req.body, {
       where: {
@@ -36,7 +36,7 @@ router.put('/comment/:id', ensureAuthentication, async (req, res) => {
 });
 
 // DELETE a comment by ID
-router.delete('/comment/:id', ensureAuthentication, async (req, res) => {
+router.delete('/comment/:id', withAuth, async (req, res) => {
   try {
     const commentData = await Comment.destroy({
       where: {
