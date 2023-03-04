@@ -62,7 +62,7 @@ passport.deserializeUser(async (sessionData, done) => {
 // Define ensureAuthentication middleware
 const ensureAuthentication = (req, res, next) => {
   // added !
-  if (req.isAuthenticated()) {
+  if (!req.isAuthenticated()) {
     return next();
   }
   res.redirect('/login');
