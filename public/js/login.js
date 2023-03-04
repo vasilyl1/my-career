@@ -53,4 +53,4 @@ document
 
 document
   .getElementById('signupBtn')
-  .addEventListener('submit', signupFormHandler);
+  .addEventListener('click', signupFormHandler);
