@@ -1,4 +1,4 @@
-//Authentication Middleware
+/*//Authentication Middleware
 const passport = require('passport');
 //Authenticate Users by Username and Password
 const LocalStrategy = require('passport-local').Strategy;
@@ -69,4 +69,4 @@ const ensureAuthentication = (req, res, next) => {
 };
 
 // Export ensureAuthentication function
-module.exports = { ensureAuthentication };
+module.exports = { ensureAuthentication }; */

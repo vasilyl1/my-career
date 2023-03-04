@@ -9,7 +9,7 @@ const loginFormHandler = async (event) => {
     // Send a POST request to the /api/user/login route
     const response = await fetch('/api/user/login', {
       method: 'POST',
-      body: JSON.stringify({ email: email, password: password }),
+      body: JSON.stringify({ email, password }),
       headers: { 'Content-Type': 'application/json' }
     });
 
@@ -48,13 +48,13 @@ const signupFormHandler = async (event) => {
 };
 
 
-document.querySelector('#login').addEventListener('click', loginFormHandler);
+//document.querySelector('#login').addEventListener('click', loginFormHandler);
 //document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
 
-document
-  .getElementById('login')
-  .addEventListener('click', loginFormHandler); // add event listener for when the login button is clicked
+//document
+//  .getElementById('login1')
+//  .addEventListener('click', loginFormHandler); // add event listener for when the login button is clicked
 
-document
-  .getElementById('signupBtn')
-  .addEventListener('click', signupFormHandler);
+//document
+//  .getElementById('signupBtn')
+//  .addEventListener('click', signupFormHandler);

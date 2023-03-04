@@ -11,10 +11,6 @@ router.get('/',withAuth, (req, res) => {
 router.get('/dashboard', withAuth, async (req, res) => {
 
   try {
-    if (req.session.loggedIn) {
-      res.redirect('/login');
-      return;
-    }
 
     let goalData;
 
@@ -43,7 +39,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
           }
         ],
         where: {
-          userId: req.session.user_id
+          userId: req.session.userId
         }
       });
     }
@@ -64,10 +60,6 @@ router.get('/dashboard', withAuth, async (req, res) => {
 router.get('/goal/:id', withAuth, async (req, res) => {
 
   try {
-    if (req.session.loggedIn) {
-      res.redirect('/login');
-      return;
-    }
     const goalData = await Goal.findByPk(req.params.id, {
       include: [
         {
@@ -75,7 +67,7 @@ router.get('/goal/:id', withAuth, async (req, res) => {
         }
       ],
       where: {
-        userId: req.session.user_id
+        userId: req.session.userId
       }
     }
     );
@@ -136,19 +128,6 @@ router.get('/login', async (req, res) => {
   }
 
   await res.render('login');
-});
-
-//POST Route for login page using passport to autheticate user
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/dashboard',//If user successful, redirected to the dashboard
-  failureRedirect: '/login' //If user fails authentication, redirected back to the login page
-}));
-
-// Logout Route
-router.get('/logout', (req, res) => {
-  req.logout();//provided by passport.js to remove user property and clear users session
-  req.session.destroy();
-  res.redirect('/login'); //redirects user back to login page
 });
 
 module.exports = router;
