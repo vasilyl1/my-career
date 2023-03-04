@@ -8,7 +8,7 @@ router.get('/',withAuth, (req, res) => {
 
 // home view for the user and advisor - see wireframe
 router.get('/dashboard', withAuth, async (req, res) => {
-  req.session.userId = 1;
+  // req.session.userId = 2;
   try {
 
     let goalData;
