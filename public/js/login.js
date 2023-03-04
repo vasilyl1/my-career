@@ -65,5 +65,3 @@ document
 document
   .getElementById('signupSubmit')
   .addEventListener('click', signupFormHandler);
-
-$('#signupContainer').hide();

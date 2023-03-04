@@ -8,7 +8,7 @@ router.get('/',withAuth, (req, res) => {
 
 // home view for the user and advisor - see wireframe
 router.get('/dashboard', withAuth, async (req, res) => {
-
+  req.session.userId = 1;
   try {
     if (req.session.loggedIn) {
       res.redirect('/login');
@@ -29,13 +29,13 @@ router.get('/dashboard', withAuth, async (req, res) => {
           }
         ],
         where: {
-          advice: req.session.user_id
+          advice: req.session.userId
         }
       });
 
       const uData = await User.findOne({
         where: {
-          id: req.session.user_id
+          id: req.session.userId
         }
       });
 
@@ -52,7 +52,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
           }
         ],
         where: {
-          userId: req.session.user_id
+          userId: req.session.userId
         }
       });
     }
@@ -84,7 +84,7 @@ router.get('/goal/:id', withAuth, async (req, res) => {
         }
       ],
       where: {
-        userId: req.session.user_id
+        userId: req.session.userId
       }
     }
     );
