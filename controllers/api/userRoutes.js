@@ -18,7 +18,7 @@ router.post('/login', async (req, res) => {
             .json({ message: 'Incorrect email or password, please try again' });
           return;
         } else { // email and password matched - bingo
-          await req.session.save(() => {
+          req.session.save(() => {
             req.session.userId = user[i].id;
             req.session.loggedIn = true;
             req.session.advisor = user[i].advisor;
