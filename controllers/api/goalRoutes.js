@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Goal } = require('../../models');
-const { ensureAuthentication } = require('../../config/passport');
+const withAuth = require('../../utils/auth');
 
 /* // GET all goals
 router.get('/goals', ensureAuthentication, async (req, res) => {
@@ -55,7 +55,7 @@ router.get('/goals', ensureAuthentication, async (req, res) => {
 }); */
 
 // Create(POST) a new goal
-router.post('/goal', ensureAuthentication, async (req, res) => {
+router.post('/goal', withAuth, async (req, res) => {
   try {
     req.body.userId = req.session.user_id;
     const goalData = await Goal.create(req.body);
@@ -69,7 +69,7 @@ router.post('/goal', ensureAuthentication, async (req, res) => {
 
 
 // Update(PUT) a goal by ID
-router.put('/goal/:id', ensureAuthentication, async (req, res) => {
+router.put('/goal/:id', withAuth, async (req, res) => {
   try {
     const goalData = await Goal.update(req.body, {
       where: {
@@ -87,7 +87,7 @@ router.put('/goal/:id', ensureAuthentication, async (req, res) => {
 });
 
 // DELETE goal by ID
-router.delete('/goal/:id', ensureAuthentication, async (req, res) => {
+router.delete('/goal/:id', withAuth, async (req, res) => {
   try {
     const goalData = await Goal.destroy({
       where: {

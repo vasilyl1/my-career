@@ -17,7 +17,12 @@ const PORT = process.env.PORT || 3001;
 // Define session options
 const sessionOptions = {
   secret: 'anysecurestring', //Used to prevent session tampering
-  cookie: {},
+  cookie: {
+    maxAge: 300000,
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict'
+  },
   resave: false, //Session saved to Store(SequelizeStore) if true, always saved, false only saved if something has changed - false improves performance
   saveUninitialized: true, // Determines if a session should be created automatically when a User visits the site without a session cookie
   store: new SequelizeStore({ //Used to store session data
@@ -44,8 +49,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use(passport.initialize()); // Initialize passport
-app.use(passport.session()); // Add passport session middleware
+//app.use(passport.initialize()); // Initialize passport
+//app.use(passport.session()); // Add passport session middleware
 
 app.use(controllerRoute);
 
