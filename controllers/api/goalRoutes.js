@@ -3,7 +3,7 @@ const { Goal } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 /* // GET all goals
-router.get('/goals', ensureAuthentication, async (req, res) => {
+router.get('/', ensureAuthentication, async (req, res) => {
   try {
     if (req.session.loggedIn) {
       res.redirect('/login');
