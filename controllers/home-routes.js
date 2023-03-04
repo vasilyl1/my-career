@@ -1,14 +1,14 @@
 const router = require('express').Router();
 const { Goal, User, Comment } = require('../models');
-const { ensureAuthentication } = require('../config/passport');
+const withAuth = require('../utils/auth');
 const passport = require('passport');
 
-router.get('/',ensureAuthentication, (req, res) => {
+router.get('/',withAuth, (req, res) => {
   res.redirect('/dashboard');
 });
 
 // home view for the user and advisor - see wireframe
-router.get('/dashboard', ensureAuthentication, async (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
 
   try {
     if (req.session.loggedIn) {
@@ -61,7 +61,7 @@ router.get('/dashboard', ensureAuthentication, async (req, res) => {
 });
 
 // goal view for the user and advisor - see wireframe
-router.get('/goal/:id', ensureAuthentication, async (req, res) => {
+router.get('/goal/:id', withAuth, async (req, res) => {
 
   try {
     if (req.session.loggedIn) {
@@ -107,7 +107,7 @@ router.get('/goal/:id', ensureAuthentication, async (req, res) => {
 });
 
 // GET a single comment by ID
-router.get('/comment/:id', ensureAuthentication, async (req, res) => {
+router.get('/comment/:id', withAuth, async (req, res) => {
   try {
     const commentData = await Comment.findByPk(req.params.id,
       {
