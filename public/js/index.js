@@ -1,4 +1,5 @@
-$(async function() {
+$(function() {
+
   $('#newGoalBtn').click(() => {
     $('#scrollable-window').hide();
     $('#newGoalBtn').hide();
@@ -12,6 +13,8 @@ $(async function() {
 
   $('#createGoalContainer').hide();
   $( '#newGoalDate' ).datepicker();
+
+
   // const goalIds = await fetch('/api/goals').then(res => res.json()).then(data => data.map(goal => goal._id));
   // console.log(goalIds);
 });
