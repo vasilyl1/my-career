@@ -8,7 +8,7 @@ const controllerRoute = require('./controllers/');
 const sequelize = require('./config/connection');
 const helpers = require('./utils/helpers');
 
-const passport = require('passport');
+// const passport = require('passport');
 
 
 const app = express();

@@ -1,50 +1,40 @@
 const router = require('express').Router();
+const bcrypt = require('bcrypt');
 const { User } = require('../../models');
 
 // Login route
 router.post('/login', async (req, res) => {
   try {
-
     const user = await User.findAll();
     let match = false;
-    for (let i = 0; (i < user.length); i++) {
+    for (let i = 0; (i < user.length) && (!match); i++) {
       match = await bcrypt.compare(req.body.email, user[i].email);
-
       if (match) { // email matched
         const isMatch = await user[i].checkPassword(req.body.password);
         if (!isMatch) { // password did not match
+          match = false;
           res
             .status(400)
             .json({ message: 'Incorrect email or password, please try again' });
           return;
         } else { // email and password matched - bingo
-          req.session.save(() => {
-            req.session.userId = userData.id;
+          await req.session.save(() => {
+            req.session.userId = user[i].id;
             req.session.loggedIn = true;
-
-            res.json({ user: user[i], message: 'You are now logged in!' });
+            req.session.advisor = user[i].advisor;
+            res.status(200).json({ user: user[i], message: 'You are now logged in!' });
           });
           return;
         }
       }
     }
 
-
-    const validPassword = await userData.checkPassword(req.body.password);
-
-    if (!validPassword) {
+    if (!match) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+        .json({ message: 'Incorrect email. Please try again!' });
       return;
     }
-
-    req.session.save(() => {
-      req.session.userId = userData.id;
-      req.session.loggedIn = true;
-
-      res.json({ user: userData, message: 'You are now logged in!' });
-    });
 
 
   } catch (err) {
@@ -69,13 +59,17 @@ router.post('/signup', async (req, res) => {
 });
 
 // Logout route
-router.post('/api/user/logout', (req, res) => {
-  if (req.session.loggedIn) {
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
+router.post('/api/user/logout', async (req, res) => {
+  try {
+    if (req.session.loggedIn) {
+      req.session.destroy(() => {
+        res.status(204).end();
+      });
+    } else {
+      res.status(404).json(err);
+    }
+  } catch(err) {
+    res.status(400).json(err);
   }
 });
 
