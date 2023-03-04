@@ -22,11 +22,14 @@ const loginFormHandler = async (event) => {
   }
 };
 
-const signupFormHandler = async (event) => {
+const signupFunction = async (event) => {
   event.preventDefault();
-
   $('#loginContainer').hide();
   $('#signupContainer').show();
+};
+
+const signupFormHandler = async (event) => {
+  event.preventDefault();
 
   const name = document.querySelector('#name-signup').value.trim();
   const email = document.querySelector('#email-signup').value.trim();
@@ -55,6 +58,11 @@ const signupFormHandler = async (event) => {
 //  .getElementById('login1')
 //  .addEventListener('click', loginFormHandler); // add event listener for when the login button is clicked
 
-//document
-//  .getElementById('signupBtn')
-//  .addEventListener('click', signupFormHandler);
+
+document
+  .getElementById('signupBtn')
+  .addEventListener('click', signupFunction);
+
+document
+  .getElementById('signupSubmit')
+  .addEventListener('click', signupFormHandler);

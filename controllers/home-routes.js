@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { Goal, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
-const passport = require('passport');
 
 router.get('/',withAuth, (req, res) => {
   res.redirect('/dashboard');
@@ -9,10 +8,11 @@ router.get('/',withAuth, (req, res) => {
 
 // home view for the user and advisor - see wireframe
 router.get('/dashboard', withAuth, async (req, res) => {
-
+  req.session.userId = 1;
   try {
 
     let goalData;
+    let uAdvisor = false;
 
     if (req.session.advisor){ //SQL for all goals for advisory review
       goalData = await Goal.findAll({
@@ -25,9 +25,18 @@ router.get('/dashboard', withAuth, async (req, res) => {
           }
         ],
         where: {
-          advice: req.session.user_id
+          advice: req.session.userId
         }
       });
+
+      const uData = await User.findOne({
+        where: {
+          id: req.session.userId
+        }
+      });
+
+      uAdvisor = uData.advisor;
+
     } else { //SQL for all goals for the user
       goalData = await Goal.findAll({
         include: [
@@ -49,7 +58,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
       delete newGoal.user.password;
       return newGoal;
     });
-    res.render('userDashboard', { goals, loggedIn: req.session.loggedIn });
+    res.render('userDashboard', { goals, loggedIn: req.session.loggedIn, uAdvisor });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
