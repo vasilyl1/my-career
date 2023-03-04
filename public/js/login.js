@@ -22,11 +22,10 @@ const loginFormHandler = async (event) => {
   }
 };
 
-const signupFunction = (event) => {
+const signupFunction = async (event) => {
   event.preventDefault();
   $('#loginContainer').hide();
   $('#signupContainer').show();
-  signupFormHandler();
 };
 
 const signupFormHandler = async (event) => {
@@ -62,3 +61,9 @@ document
 document
   .getElementById('signupBtn')
   .addEventListener('click', signupFunction);
+
+document
+  .getElementById('signupSubmit')
+  .addEventListener('click', signupFormHandler);
+
+$('#signupContainer').hide();
