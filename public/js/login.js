@@ -2,22 +2,22 @@ const loginFormHandler = async (event) => {
   event.preventDefault();
 
   // Collect values from the login form
-  const email = document.getElementById('#loginEmail').value.trim();
-  const password = document.getElementById('#loginPassword').value.trim();
+  const email = document.querySelector('#loginEmail').value.trim();
+  const password = document.querySelector('#loginPassword').value.trim();
 
   if (email && password) {
-    // Send a POST request to the /login homeroute
-    const response = await fetch('/login', {
+    // Send a POST request to the /api/user/login route
+    const response = await fetch('/api/user/login', {
       method: 'POST',
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email: email, password: password }),
       headers: { 'Content-Type': 'application/json' }
     });
 
     if (response.ok) {
-      // If successful, redirect the browser to the profile page
+      // If successful, redirect the browser to the dashboard page
       document.location.replace('/dashboard');
     } else {
-      console.err(response.statusText);
+      console.error(response.statusText);
     }
   }
 };
@@ -30,24 +30,19 @@ const signupFormHandler = async (event) => {
   const password = document.querySelector('#password-signup').value.trim();
 
   if (name && email && password) {
-    const response = await fetch('/api/users', {
+    const response = await fetch('/api/user', {
       method: 'POST',
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({ name: name, email: email, password: password }),
       headers: { 'Content-Type': 'application/json' }
     });
 
     if (response.ok) {
-      document.location.replace('/profile');
+      document.location.replace('/dashboard');
     } else {
-      console.err(response.statusText);
+      console.error(response.statusText);
     }
   }
 };
 
-document
-  .getElementById('login')
-  .addEventListener('click', loginFormHandler); // add event listener for when the login button is clicked
-
-//document
-//  .querySelector('.signup-form')
-//  .addEventListener('submit', signupFormHandler);
+document.querySelector('#login').addEventListener('click', loginFormHandler);
+document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
