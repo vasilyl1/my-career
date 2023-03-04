@@ -26,6 +26,7 @@ THEN I’d like to have an ability to get the AI comment for my objectives.
 <br>
 
 ## Acceptance Criteria ✅
+```
 I WANT TO be presented with the login page if I am not logged in
 THEN I AM able to login or move to create a new user
 WHEN I sign in as a user
@@ -58,6 +59,7 @@ WHEN I sign in as an advisor
   I WANT TO be presented with the edited comment updated
   WHEN I click the button to delete a comment
   I WANT TO be presented with the updated comments
+  ```
 <br>
 
 ## Deployment Link 🔗

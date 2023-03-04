@@ -30,7 +30,6 @@ router.post('/login', async (req, res) => {
     }
 
 
-
     const validPassword = await userData.checkPassword(req.body.password);
 
     if (!validPassword) {
@@ -70,8 +69,8 @@ router.post('/signup', async (req, res) => {
 });
 
 // Logout route
-router.post('/logout', (req, res) => {
-  if (req.session.logged_in) {
+router.post('/api/user/logout', (req, res) => {
+  if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
     });
