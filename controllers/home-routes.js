@@ -18,7 +18,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
     let goalData;
 
-    if (req.session.advisor) { //SQL for all goals for advisory review
+    if (req.session.advisor){ //SQL for all goals for advisory review
       goalData = await Goal.findAll({
         include: [
           {
@@ -43,7 +43,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
           }
         ],
         where: {
-          userId: 1 //req.session.user_id
+          userId: req.session.user_id
         }
       });
     }

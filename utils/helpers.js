@@ -5,5 +5,12 @@ module.exports = {
   },
   first: (array) => {
     return array && array[0];
+  },
+  toBoolean: (value) => {
+    if (value === 'true' || value === true) {
+      return true;
+    } else {
+      return false;
+    }
   }
 };

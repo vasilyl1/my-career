@@ -28,6 +28,26 @@ router.post('/login', async (req, res) => {
         }
       }
     }
+
+
+
+    const validPassword = await userData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+      return;
+    }
+
+    req.session.save(() => {
+      req.session.userId = userData.id;
+      req.session.loggedIn = true;
+
+      res.json({ user: userData, message: 'You are now logged in!' });
+    });
+
+
   } catch (err) {
     res.status(400).json(err);
   }
