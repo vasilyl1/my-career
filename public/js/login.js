@@ -1,4 +1,7 @@
-const loginFormHandler = async (event) => {
+// Import modal functions
+import { openModal, closeModal } from './loginPartial.js';
+
+async function loginFormHandler(event) {
   event.preventDefault();
 
   // Collect values from the login form
@@ -29,7 +32,7 @@ const loginFormHandler = async (event) => {
       modal.classList.add('modal--active');
     }
   }
-};
+}
 
 // Hide modal on click
 const modalCloseHandler = (event) => {
@@ -38,7 +41,7 @@ const modalCloseHandler = (event) => {
 };
 
 // Event listeners
-const loginForm = document.querySelector('#loginBtnSignIn');
+const loginForm = document.querySelector('#loginForm');
 const modalCloseButton = document.querySelector('#modal-cancel');
 loginForm.addEventListener('submit', loginFormHandler);
 modalCloseButton.addEventListener('click', modalCloseHandler);
@@ -71,15 +74,11 @@ const signupFormHandler = async (event) => {
   }
 };
 
-
 document
   .getElementById('loginBtnSignIn')
   .addEventListener('click', loginFormHandler); // add event listener for when the login button is clicked
 
-
-document
-  .getElementById('signupBtn')
-  .addEventListener('click', signupFunction);
+document.getElementById('signupBtn').addEventListener('click', signupFunction);
 
 document
   .getElementById('signupSubmit')
