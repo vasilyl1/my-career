@@ -2,7 +2,7 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const { User } = require('../../models');
 
-// Login route
+// Login route    /api/usr/login
 router.post('/login', async (req, res) => {
   try {
     const user = await User.findAll();
@@ -59,7 +59,7 @@ router.post('/signup', async (req, res) => {
 });
 
 // Logout route
-router.post('/api/user/logout', async (req, res) => {
+router.get('/logout', async (req, res) => {
   try {
     if (req.session.loggedIn) {
       req.session.destroy(() => {
