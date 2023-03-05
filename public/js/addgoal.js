@@ -1,8 +1,7 @@
 const addGoalClickHandler = async (event) => {
-
   event.preventDefault();
   const today = new Date();
-  const responseNewGoal = await fetch('api/goals/goal', {//call API to create a new goal
+  const responseNewGoal = await fetch('/api/goals', { // call API to create a new goal
     method: 'POST',
     body: JSON.stringify(
       {
@@ -13,7 +12,9 @@ const addGoalClickHandler = async (event) => {
     headers: { 'Content-Type': 'application/json' }
   });
   if (responseNewGoal.ok) {
-    const response = await fetch(`/goal/${ responseNewGoal.id }`, {//call the single goal homeRoute for the user to add the details of the goal
+    const newGoal = await responseNewGoal.json();
+    //possibly change responseNewGoal.id to just newGoal.id
+    const response = await fetch(`/api/goals/${ responseNewGoal.id }`, { // call the single goal homeRoute for the user to add the details of the goal
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     });
@@ -21,7 +22,6 @@ const addGoalClickHandler = async (event) => {
     console.log(responseNewGoal.statusText);
   }
 };
-
 
 document
   .getElementById('createGoalBtn')
