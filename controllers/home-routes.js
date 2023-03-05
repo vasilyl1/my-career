@@ -103,8 +103,8 @@ router.get('/goal/:id', withAuth, async (req, res) => {
     });
 
     // please use advisors[i].id and advisors[i].name as the advisor id and name - loop through an array
-
-    res.render('goal', { goal, loggedIn: req.session.loggedIn, advisors: advisors });
+    const loggedIn = req.session.loggedIn;
+    res.render('goal', { goal, loggedIn, advisors });
 
   } catch (err) {
     console.log(err);

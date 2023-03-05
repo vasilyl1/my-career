@@ -12,8 +12,14 @@ $(function() {
   });
 
   $('#createGoalContainer').hide();
+  $('#editGoalContainer').hide();
+  $( '#editGoalDate' ).datepicker();
   $( '#newGoalDate' ).datepicker();
 
+  $('#editGoalForm').click(() => {
+    $('#singleGoal').hide();
+    $('#editGoalContainer').show();
+  });
   // const goalIds = await fetch('/api/goals').then(res => res.json()).then(data => data.map(goal => goal._id));
   // console.log(goalIds);
 });
