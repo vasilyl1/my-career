@@ -14,12 +14,12 @@
             <div class='flex justify-end md:justify-center'>
               {{#if loggedIn}}
               <label class='text-white self-center px-4' style='padding-top:1px' value='{{uData.dataValues.id}}' id='currentUser'>{{uData.dataValues.username}}</label>
-              {{#if logged_in}}
-              <label class='text-white self-center px-4' style='padding-top:1px'>{{> userName}}</label>
-             <a href="/api/user/logout">  
-             {{!-- hyperlink created for logging out user --}}
-              <button class="no-button text-white rounded-md px-3 py-2 text-sm font-medium hover:no-underline hover:text-white 
-                hover:bg-gray-600" id="logout">Logout</button></a>
+              <a href="/api/user/logout">  
+              {{!-- hyperlink created for logging out user --}}
+                <button class="no-button text-white rounded-md px-3 py-2 text-sm font-medium hover:no-underline hover:text-white 
+                  hover:bg-gray-600" id="logout">Logout
+                </button>
+              </a>
 
               {{else}}
               <a href="/login">
@@ -44,10 +44,12 @@
       <!-- Conditionally render login or logout links -->
       {{#if loggedIn}}
         <label class='text-gray-300 self-center px-4' style='padding-top:1px' value='{{uData.dataValues.id}}' id='currentUser'>{{uData.dataValues.username}}</label>
-        <button class="no-button text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" id="logout">Logout</button>
+        <a href="/api/user/logout">  
+          <button class="no-button text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" id="logout">Logout</button>
+        </a>
       {{else}}
       <a href="/login">
-        <button class="no-button hover:bg-gray-700 text-gray-300 hover:text-white block rounded-md px-3 py-2 text-base font-medium hover:no-underline hover:text-white hover:bg-gray-600" id="login">Login</button>
+        <button class="no-button hover:bg-gray-700 text-gray-300 hover:text-white block rounded-md px-3 py-2 text-base font-medium hover:no-underline hover:text-white hover:bg-gray-600" id="loginBtn">Login</button>
       </a>
       {{/if}}
     </div>
