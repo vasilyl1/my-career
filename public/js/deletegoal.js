@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 const deleteGoalClickHandler = async (event) => {
   event.preventDefault();
   const goalId = event.target.getAttribute('data-id');
