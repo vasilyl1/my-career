@@ -12,5 +12,8 @@ module.exports = {
     } else {
       return false;
     }
+  },
+  formatLine: (line) => {// cuts the string for preview
+    return line.slice(0,150);
   }
 };
