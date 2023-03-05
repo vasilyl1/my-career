@@ -20,6 +20,7 @@ router.post('/login', async (req, res) => {
         } else { // email and password matched - bingo
           req.session.save(() => {
             req.session.userId = user[i].id;
+            req.session.username = user[i].username;
             req.session.loggedIn = true;
             req.session.advisor = user[i].advisor;
             res.status(200).json({ user: user[i], message: 'You are now logged in!' });
@@ -50,6 +51,7 @@ router.post('/signup', async (req, res) => {
     req.session.save(() => {
       req.session.userId = userData.id;
       req.session.loggedIn = true;
+      req.session.username = userData[i].username;
 
       res.status(200).json(userData);
     });

@@ -12,7 +12,12 @@ router.get('/dashboard', withAuth, async (req, res) => {
   try {
 
     let goalData;
-    let uData;
+    const uData = {
+      userId: req.session.userId,
+      loggedIn: req.session.loggedIn,
+      advisor: req.session.advisor,
+      username: req.session.username
+    };
 
     if (req.session.advisor){ //SQL for all goals for advisory review
       goalData = await Goal.findAll({
@@ -28,12 +33,6 @@ router.get('/dashboard', withAuth, async (req, res) => {
           advice: req.session.userId
         }
       });
-
-      uData = await User.findOne({
-        where: {
-          id: req.session.userId
-        }
-      });
     } else { //SQL for all goals for the user
       goalData = await Goal.findAll({
         include: [
@@ -46,12 +45,6 @@ router.get('/dashboard', withAuth, async (req, res) => {
         ],
         where: {
           userId: req.session.userId
-        }
-      });
-
-      uData = await User.findOne({
-        where: {
-          id: req.session.userId
         }
       });
     }
@@ -72,6 +65,12 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
 // goal view for the user and advisor - see wireframe
 router.get('/goal/:id', withAuth, async (req, res) => {
+  const uData = {
+    userId: req.session.userId,
+    loggedIn: req.session.loggedIn,
+    advisor: req.session.advisor,
+    username: req.session.username
+  };
 
   try {
     const goalData = await Goal.findByPk(req.params.id, {
@@ -104,7 +103,7 @@ router.get('/goal/:id', withAuth, async (req, res) => {
 
     // please use advisors[i].id and advisors[i].name as the advisor id and name - loop through an array
     const loggedIn = req.session.loggedIn;
-    res.render('goal', { goal, loggedIn, advisors });
+    res.render('goal', { goal, loggedIn, advisors, uData });
 
   } catch (err) {
     console.log(err);

@@ -13,7 +13,7 @@
             
             <div class='flex justify-end md:justify-center'>
               {{#if loggedIn}}
-              <label class='text-white self-center px-4' style='padding-top:1px' value='{{uData.dataValues.id}}' id='currentUser'>{{uData.dataValues.username}}</label>
+              <label class='text-white self-center px-4' style='padding-top:1px' value='{{uData.id}}' id='currentUser'>{{uData.username}}</label>
               <a href="/api/user/logout">  
               {{!-- hyperlink created for logging out user --}}
                 <button class="no-button text-white rounded-md px-3 py-2 text-sm font-medium hover:no-underline hover:text-white 
@@ -43,7 +43,7 @@
       </a>
       <!-- Conditionally render login or logout links -->
       {{#if loggedIn}}
-        <label class='text-gray-300 self-center px-4' style='padding-top:1px' value='{{uData.dataValues.id}}' id='currentUser'>{{uData.dataValues.username}}</label>
+        <label class='text-gray-300 self-center px-4' style='padding-top:1px' value='{{uData.id}}' id='currentUser'>{{uData.username}}</label>
         <a href="/api/user/logout">  
           <button class="no-button text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" id="logout">Logout</button>
         </a>
