@@ -11,7 +11,9 @@ $(function() {
     $('#newGoalBtn').show();
   });
 
+  $('#btnContainer').show();
   $('#createGoalContainer').hide();
+  $('#addCommentContainer').hide();
   $('#editGoalContainer').hide();
   $( '#editGoalDate' ).datepicker();
   $( '#newGoalDate' ).datepicker();
@@ -20,6 +22,13 @@ $(function() {
     $('#singleGoal').hide();
     $('#editGoalContainer').show();
   });
+
+  $('#addCommentForm').click(() => {
+    $('#btnContainer').hide();
+    $('#singleGoal').hide();
+    $('#addCommentContainer').show();
+  });
+
   // const goalIds = await fetch('/api/goals').then(res => res.json()).then(data => data.map(goal => goal._id));
   // console.log(goalIds);
 });
