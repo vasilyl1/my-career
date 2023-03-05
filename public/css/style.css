@@ -27,3 +27,36 @@ header, .project:not(:last-child) {
   display: none;
 }
 
+.modal {
+  transition: opacity 0.25s ease;
+}
+
+.modal-overlay {
+  transition: opacity 0.25s ease;
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+}
+
+.modal-close {
+  cursor: pointer;
+}
+
+.modal-content {
+  transition: all 0.3s ease-out;
+  transform: translateY(-100px);
+  opacity: 0;
+}
+
+.modal.active .modal-content {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+

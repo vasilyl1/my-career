@@ -12,7 +12,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
   try {
 
     let goalData;
-    let uAdvisor = false;
+    let uData;
 
     if (req.session.advisor){ //SQL for all goals for advisory review
       goalData = await Goal.findAll({
@@ -29,14 +29,11 @@ router.get('/dashboard', withAuth, async (req, res) => {
         }
       });
 
-      const uData = await User.findOne({
+      uData = await User.findOne({
         where: {
           id: req.session.userId
         }
       });
-
-      uAdvisor = uData.advisor;
-
     } else { //SQL for all goals for the user
       goalData = await Goal.findAll({
         include: [
@@ -58,7 +55,9 @@ router.get('/dashboard', withAuth, async (req, res) => {
       delete newGoal.user.password;
       return newGoal;
     });
-    res.render('userDashboard', { goals, loggedIn: req.session.loggedIn, uAdvisor });
+
+    const loggedIn = req.session.loggedIn;
+    res.render('userDashboard', { goals, loggedIn, uData });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
