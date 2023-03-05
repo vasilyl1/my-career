@@ -59,4 +59,11 @@ header, .project:not(:last-child) {
   opacity: 1;
 }
 
+.flip-container {
+  transform: scaleY(1);
+  transform: scaleX(-1)
+}
 
+.flip-container.flipped {
+  transform: scaleY(-1);
+}

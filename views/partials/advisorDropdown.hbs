@@ -1,0 +1,43 @@
+<div class="relative inline-block text-left">
+  <button type="button" class="relative flex flex-row z-10 bg-gray-700 text-white rounded-md px-3 py-2 m-2 text-sm font-medium hover:bg-gray-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="advisorDropdownBtn" aria-expanded='false' aria-haspopup="true" onclick="toggleDropdown()">
+    Request Review
+    <div class='flip-container'><!-- Heroicon name: solid/chevron-down -->
+      <svg class="mx-1 h-5 w-5 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" id='chevronDown'>
+        <path fill-rule="evenodd" d="M5.293 7.707a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L10 5.414l-3.293 3.293a1 1 0 0 1-1.414 0z" clip-rule="evenodd" />
+      </svg>
+    </div>
+  </button>
+
+  <div id='advisorDropdownMenu' class="origin-top-right absolute left-0 mt-2 w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="advisorDropdownBtn" aria-hidden='true'>
+    <div class="py-1" role='menu'>
+      {{#each advisors as |advisor|}}
+        <a href="/advisor/{{advisor.value}}" class='block px-4 py-2 text-xs text-gray-700 hover:bg-gray-100' role="menuitem" tabindex="-1" id="menuItem{{advisor.value}}">{{advisor.name}}
+        </a>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleDropdown () {
+    // Toggle the 'aria-expanded' attribute
+    $(this).attr('aria-expanded', function(index, attr) {
+      return attr == 'true' ? 'false' : 'true';
+    });
+
+    // Toggle the 'aria-hidden' attribute
+    $("#advisorDropdownMenu").attr('aria-hidden', function(index, attr) {
+      return attr == 'true' ? 'false' : 'true';
+    });
+
+    // select the SVG element and its parent container
+    const svg = $('#chevronDown');
+    const svgContainer = svg.parent();
+
+    // toggle the flipped class on click
+    svgContainer.toggleClass('flipped');
+
+    // Toggle the visibility of the dropdown menu
+    $("#advisorDropdownMenu").toggleClass("hidden");
+  };
+</script>
