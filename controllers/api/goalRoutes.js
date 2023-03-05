@@ -8,11 +8,10 @@ router.post('/goal', withAuth, async (req, res) => {
   try {
     req.body.userId = req.session.userId;
     const goalData = await Goal.create(req.body);
-    const goal = goalData.get({ plain: true });
     res.status(200).json(goal);
   } catch (err) {
     console.log(err);
-    res.status(500).json(err);
+    res.status(400).json(err);
   }
 });
 

@@ -1,9 +1,15 @@
 const addGoalClickHandler = async (event) => {
 
   event.preventDefault();
+  const today = new Date();
   const responseNewGoal = await fetch('api/goals/goal', {//call API to create a new goal
     method: 'POST',
-    body: JSON.stringify({ name: 'my new development goal', body: 'please add some details about your new development goal here' }),
+    body: JSON.stringify(
+      {
+        name: 'my new development goal',
+        body: 'please add some details about your new development goal here',
+        date: today
+      }),
     headers: { 'Content-Type': 'application/json' }
   });
   if (responseNewGoal.ok) {
@@ -12,7 +18,7 @@ const addGoalClickHandler = async (event) => {
       headers: { 'Content-Type': 'application/json' }
     });
   } else {
-    console.err(responseNewGoal.statusText);
+    console.log(responseNewGoal.statusText);
   }
 };
 
