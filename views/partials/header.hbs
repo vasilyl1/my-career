@@ -39,6 +39,7 @@
       </a>
       <!-- Conditionally render login or logout links -->
       {{#if loggedIn}}
+        <label class='text-gray-300 self-center px-4' style='padding-top:1px'>{{uData.dataValues.username}}</label>
         <button class="no-button text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" id="logout">Logout</button>
       {{else}}
       <a href="/login">
