@@ -18,6 +18,9 @@ const loginFormHandler = async (event) => {
       document.location.replace('/dashboard');
     } else {
       console.error(response.statusText);
+      // Clear the email and password fields on unsuccessful login attempt
+      document.querySelector('#loginEmail').value = '';
+      document.querySelector('#loginPassword').value = '';
     }
   }
 };
