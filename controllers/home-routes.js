@@ -48,6 +48,12 @@ router.get('/dashboard', withAuth, async (req, res) => {
           userId: req.session.userId
         }
       });
+
+      uData = await User.findOne({
+        where: {
+          id: req.session.userId
+        }
+      });
     }
 
     const goals = goalData.map((goal) => {

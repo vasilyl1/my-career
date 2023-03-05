@@ -1,5 +1,5 @@
 
-{{#unless uAdvisor}}
+{{#unless uData.dataValues.advisor}}
   <div class='flex-col w-5/6'>
     {{> userContent}}
     {{> createGoal}}
@@ -10,6 +10,6 @@
   </div>
 {{/unless}}
 
-{{#if uData.advisor}}
+{{#if uData.dataValues.advisor}}
   {{> userContent}}
 {{/if}}
