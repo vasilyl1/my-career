@@ -18,11 +18,15 @@ $(function() {
   // console.log(goalIds);
 });
 
-async function showPartial (element) {
-  const id = `goal${ element.id }`;
-  const source = document.getElementById(id);
-  // const template = Handlebars.compile(source);
-  // const context = element;
-  // onst html = template(context);
-  document.getElementById('partialContainer').innerHTML = await source;
+async function showPartial(objId) {
+  const source = await getSource(objId);
+  const template = await Handlebars.compile(source);
+  const context = {};
+  const htmlString = template(context);
+  document.getElementById('partialContainer').innerHTML = await htmlString;
+}
+
+async function getSource(objId) {
+  const id = `goal${ objId }`;
+  return document.getElementById(id).innerHTML;
 }
