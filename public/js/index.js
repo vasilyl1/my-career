@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 $(function() {
 
   $('#newGoalBtn').click(() => {
@@ -46,3 +47,25 @@ async function getSource(objId) {
   const id = `goal${ objId }`;
   return document.getElementById(id).innerHTML;
 }
+
+function toggleDropdown () {
+  // Toggle the 'aria-expanded' attribute
+  $(this).attr('aria-expanded', function(index, attr) {
+    return attr == 'true' ? 'false' : 'true';
+  });
+
+  // Toggle the 'aria-hidden' attribute
+  $('#advisorDropdownMenu').attr('aria-hidden', function(index, attr) {
+    return attr == 'true' ? 'false' : 'true';
+  });
+
+  // select the SVG element and its parent container
+  const svg = $('#chevronDown');
+  const svgContainer = svg.parent();
+
+  // toggle the flipped class on click
+  svgContainer.toggleClass('flipped');
+
+  // Toggle the visibility of the dropdown menu
+  $('#advisorDropdownMenu').toggleClass('hidden');
+};

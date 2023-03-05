@@ -60,10 +60,9 @@ header, .project:not(:last-child) {
 }
 
 .flip-container {
-  transform: scaleY(1);
-  transform: scaleX(-1)
+  transform: scaleY(-1);
 }
 
 .flip-container.flipped {
-  transform: scaleY(-1);
+  transform: scaleY(1);
 }
