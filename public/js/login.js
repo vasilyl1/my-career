@@ -21,9 +21,27 @@ const loginFormHandler = async (event) => {
       // Clear the email and password fields on unsuccessful login attempt
       document.querySelector('#loginEmail').value = '';
       document.querySelector('#loginPassword').value = '';
+
+      // Display modal with error message
+      const modal = document.querySelector('.modal');
+      const modalMessage = document.querySelector('.modal__message');
+      modalMessage.textContent = 'Incorrect email or password.';
+      modal.classList.add('modal--active');
     }
   }
 };
+
+// Hide modal on click
+const modalCloseHandler = (event) => {
+  const modal = document.querySelector('.modal');
+  modal.classList.remove('modal--active');
+};
+
+// Event listeners
+const loginForm = document.querySelector('#loginForm');
+const modalCloseButton = document.querySelector('.modal__close');
+loginForm.addEventListener('submit', loginFormHandler);
+modalCloseButton.addEventListener('click', modalCloseHandler);
 
 const signupFunction = async (event) => {
   event.preventDefault();
