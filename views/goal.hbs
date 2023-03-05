@@ -19,23 +19,18 @@
       </li>
     </div>
   </div>
-  <div id='btnContainer'>
-    <br>
-    {{#if uData.advisor}}
-      <button class="no-button bg-gray-700 text-white rounded-md px-3 py-2 m-2 text-sm font-medium hover:no-underline hover:text-white hover:bg-gray-600" id='addCommentForm'>Add Comment</button>
-    {{else}}
-      <div class="">
-        {{> advisorDropdown}}
-      </div>
-    {{/if}}
-    <a href="/" class='flex justify-center'>
-    <button class="no-button bg-gray-700 text-white rounded-md px-3 py-2 m-2 text-sm font-medium hover:no-underline hover:text-white hover:bg-gray-600">Dashboard</button>
-    </a>
-    
-  </div>
   {{#if uData.advisor}}
     {{> addComment}}
   {{else}}
+    {{> addComment}}
     {{> editGoal}}
   {{/if}}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.footer').removeClass('hidden');
+      $('#newGoalBtn').addClass('hidden');
+      $('#dashboardBtn').removeClass('hidden');
+    });
+  </script>
 </div>
