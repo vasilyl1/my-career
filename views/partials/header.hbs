@@ -18,10 +18,11 @@
              {{!-- hyperlink created for logging out user --}}
               <button class="no-button text-white rounded-md px-3 py-2 text-sm font-medium hover:no-underline hover:text-white 
                 hover:bg-gray-600" id="logout">Logout</button></a>
+
               {{else}}
               <a href="/login">
                 <button class="no-button bg-gray-700 text-white rounded-md px-3 py-2 my-2 text-sm font-medium hover:no-underline hover:text-white 
-                hover:bg-gray-600" id="login">Login</button>
+                hover:bg-gray-600" id="loginBtn">Login</button>
               </a>
               {{/if}}
             </div>
@@ -39,7 +40,7 @@
         <h1 class='text-white px-3 py-2 text-3xl font-medium'>My Career!</h1>
       </a>
       <!-- Conditionally render login or logout links -->
-      {{#if logged_in}}
+      {{#if loggedIn}}
         <button class="no-button text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" id="logout">Logout</button>
       {{else}}
       <a href="/login">
