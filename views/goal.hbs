@@ -24,7 +24,9 @@
     {{#if uData.advisor}}
       <button class="no-button bg-gray-700 text-white rounded-md px-3 py-2 m-2 text-sm font-medium hover:no-underline hover:text-white hover:bg-gray-600" id='addCommentForm'>Add Comment</button>
     {{else}}
-      <button class="no-button bg-gray-700 text-white rounded-md px-3 py-2 m-2 text-sm font-medium hover:no-underline hover:text-white hover:bg-gray-600" id='requestReview'>Request Review</button>
+      <div class="">
+        {{> advisorDropdown}}
+      </div>
     {{/if}}
     <a href="/" class='flex justify-center'>
     <button class="no-button bg-gray-700 text-white rounded-md px-3 py-2 m-2 text-sm font-medium hover:no-underline hover:text-white hover:bg-gray-600">Dashboard</button>

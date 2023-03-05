@@ -19,6 +19,7 @@ $(function() {
   $( '#newGoalDate' ).datepicker();
 
   $('#editGoalForm').click(() => {
+    $('#btnContainer').hide();
     $('#singleGoal').hide();
     $('#editGoalContainer').show();
   });

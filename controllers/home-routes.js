@@ -96,9 +96,11 @@ router.get('/goal/:id', withAuth, async (req, res) => {
       }
     });
 
-    const advisors = advisorsData.map((goal) => { // list of advisors array
-      var newGoal = goal.get({ plain: true });
-      return newGoal;
+    const advisors = advisorsData.map((adv) => {
+      return {
+        name: adv.dataValues.username,
+        value: adv.dataValues.id
+      };
     });
 
     // please use advisors[i].id and advisors[i].name as the advisor id and name - loop through an array
