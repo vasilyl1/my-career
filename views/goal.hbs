@@ -10,7 +10,7 @@
           <br>
         </div>
         <div class="flex flex-row justify-end">
-          {{#if uData.dataValues.advisor}}
+          {{#if uData.advisor}}
           {{else}}
             <button class="no-button bg-gray-700 text-white rounded-md px-3 py-2 m-2 text-sm font-medium hover:no-underline hover:text-white hover:bg-gray-600" id="editGoalForm">Edit</button>
             <button class="no-button bg-gray-700 text-white rounded-md px-3 py-2 m-2 text-sm font-medium hover:no-underline hover:text-white hover:bg-gray-600" id="deleteGoalBtn">Delete</button>
@@ -20,7 +20,16 @@
     </div>
   </div>
   <div>
-    <button href="/" class="no-button bg-gray-700 text-white rounded-md px-3 py-2 m-2 text-sm font-medium hover:no-underline hover:text-white hover:bg-gray-600">Dashboard</button>
+    <br>
+    {{#if uData.advisor}}
+      <button class="no-button bg-gray-700 text-white rounded-md px-3 py-2 m-2 text-sm font-medium hover:no-underline hover:text-white hover:bg-gray-600" id='addCommentForm'>Add Comment</button>
+    {{else}}
+      <button class="no-button bg-gray-700 text-white rounded-md px-3 py-2 m-2 text-sm font-medium hover:no-underline hover:text-white hover:bg-gray-600" id='requestReview'>Request Review</button>
+    {{/if}}
+    <a href="/" class='flex justify-center'>
+    <button class="no-button bg-gray-700 text-white rounded-md px-3 py-2 m-2 text-sm font-medium hover:no-underline hover:text-white hover:bg-gray-600">Dashboard</button>
+    </a>
+    
   </div>
   {{#if loggedIn}}
     {{> editGoal}}
