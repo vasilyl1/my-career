@@ -38,8 +38,8 @@ const modalCloseHandler = (event) => {
 };
 
 // Event listeners
-const loginForm = document.querySelector('#loginForm');
-const modalCloseButton = document.querySelector('.modal__close');
+const loginForm = document.querySelector('#loginBtnSignIn');
+const modalCloseButton = document.querySelector('#modal-cancel');
 loginForm.addEventListener('submit', loginFormHandler);
 modalCloseButton.addEventListener('click', modalCloseHandler);
 
