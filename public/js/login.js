@@ -1,5 +1,5 @@
 // Import modal functions
-import { openModal, closeModal } from './loginPartial.js';
+import { openModal, closeModal } from '../views/partials/loginPartial.js';
 
 async function loginFormHandler(event) {
   event.preventDefault();
