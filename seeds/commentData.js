@@ -54,6 +54,72 @@ const commentdata = [
     date: 'June 23, 2021 17:00:00',
     goalId: 3,
     userId: 3
+  },
+  {
+    body: 'This is something may be very stupid as this is the comment from the AI bot',
+    date: 'June 23, 2021 17:00:00',
+    goalId: 1,
+    userId: 3
+  },
+  {
+    body: 'This is something may be very stupid as this is the comment from the AI bot',
+    date: 'June 23, 2021 17:00:00',
+    goalId: 1,
+    userId: 3
+  },
+  {
+    body: 'This is something may be very stupid as this is the comment from the AI bot',
+    date: 'June 23, 2021 17:00:00',
+    goalId: 1,
+    userId: 3
+  },
+  {
+    body: 'This is something may be very stupid as this is the comment from the AI bot',
+    date: 'June 23, 2021 17:00:00',
+    goalId: 1,
+    userId: 3
+  },
+  {
+    body: 'This is something may be very stupid as this is the comment from the AI bot',
+    date: 'June 23, 2021 17:00:00',
+    goalId: 1,
+    userId: 3
+  },
+  {
+    body: 'This is something may be very stupid as this is the comment from the AI bot',
+    date: 'June 23, 2021 17:00:00',
+    goalId: 1,
+    userId: 3
+  },
+  {
+    body: 'This is something may be very stupid as this is the comment from the AI bot',
+    date: 'June 23, 2021 17:00:00',
+    goalId: 1,
+    userId: 3
+  },
+  {
+    body: 'This is something may be very stupid as this is the comment from the AI bot',
+    date: 'June 23, 2021 17:00:00',
+    goalId: 1,
+    userId: 3
+  },
+  {
+    body: 'This is something may be very stupid as this is the comment from the AI bot',
+    date: 'June 23, 2021 17:00:00',
+    goalId: 1,
+    userId: 3
+  },
+  {
+    body: 'This is something may be very stupid as this is the comment from the AI bot',
+    date: 'June 23, 2021 17:00:00',
+    goalId: 1,
+    userId: 3
+  },
+  {
+    body: 'This is something may be very stupid as this is the comment from the AI bot',
+    date: 'June 23, 2021 17:00:00',
+    goalId: 1,
+    userId: 3
   }
 
 ];
