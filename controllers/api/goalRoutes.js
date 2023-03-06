@@ -16,8 +16,8 @@ router.post('', withAuth, async (req, res) => {
 });
 
 
-// Update(PUT) a goal by ID router.put("/:id") -- /api/goals/:id
-router.put('/goal/:id', withAuth, async (req, res) => { // /api/goals/goal/:id
+// Update(PUT) a goal by ID
+router.put('/:id', withAuth, async (req, res) => {
   try {
     const goalData = await Goal.update(req.body, {
       where: {
