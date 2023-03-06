@@ -1,6 +1,6 @@
 {{#if uData.advisor}}
   {{#each goal.comments as |comment|}}
-    <div class='my-2 border border-zinc-600 rounded-md p-2 flex flex-col'>
+    <div class='my-2 border border-zinc-600 rounded-md p-2 flex flex-col' id='commentId' value='{{comment.id}}'>
       <p class='flex self-end text-slate-400'>{{daysSinceToday comment.date}} days ago</p>
       <p class='whitespace-normal break-words'>{{comment.body}}</p>
       <div class='flex flex-row justify-between mt-3'>
