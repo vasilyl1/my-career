@@ -1,11 +1,13 @@
 /* eslint-disable no-alert */
 const deleteGoalClickHandler = async (event) => {
   event.preventDefault();
-  const goalId = event.target.getAttribute('data-id');
+
+  //get the goal ID from the URL
+  const goalId = document.location.href.substring(document.location.href.lastIndexOf('/') + 1);
+ 
   try {
     const responseDeleteGoal = await fetch(`/api/goals/${ goalId }`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' }
+      method: 'DELETE'
     });
     if (responseDeleteGoal.ok) {
       // If successful, redirect the browser to the dashboard page
@@ -20,9 +22,5 @@ const deleteGoalClickHandler = async (event) => {
 };
 
 document
-  .getElementById('singleGoal')
-  .addEventListener('click', (event) => {
-    if (event.target.matches('#deleteGoalBtn')) {
-      deleteGoalClickHandler(event);
-    }
-  });
+  .getElementById('deleteGoalBtn')
+  .addEventListener('click', deleteGoalClickHandler); // add event listener for when the add goal button is clicked

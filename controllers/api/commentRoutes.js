@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 const botResponse = require('../../utils/chatBots');
+const formatLine = require('../../utils/helpers');
 
 // CREATE(POST) a new comment
 router.post('/', withAuth, async (req, res) => {
@@ -61,8 +62,10 @@ router.delete('/:id', withAuth, async (req, res) => {
 router.post('/chatbot', withAuth, async (req, res) => {
   try {
     // chatGPT model input
-    const testResponse = await botResponse(`Provide 3 randomly important items on how can I achieve my development goal named as: ${ req.goalName }`);
-    req.body.body = testResponse;
+    const askBot = 
+    `Help me to achieve the goal ${ req.goalName }. Please provide 3 random advises.`;
+    const testResponse = await botResponse(askBot);
+    req.body.body = formatLine(testResponse.replace(/(\r\n|\n|\r)/gm,'').trim());
     const commentData = await Comment.create(req.body);
     const comment = commentData.get({ plain: true });
     res.status(200).json(comment);

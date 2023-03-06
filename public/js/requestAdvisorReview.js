@@ -16,7 +16,6 @@ const advisorMenuItemHandler = async (event) => { // advisor to comment item cli
 
   //get the advisor ID from the drop down list
   const advisorId = event.currentTarget.id.substring(event.currentTarget.id.lastIndexOf('m') + 1);
-  console.log(advisorId);
   //get the goal ID from the URL
   const goalId = document.location.href.substring(document.location.href.lastIndexOf('/') + 1);
   //update the goal advice field with advisor ID in the database
@@ -27,6 +26,7 @@ const advisorMenuItemHandler = async (event) => { // advisor to comment item cli
   });
   if (response.ok) {
     //document.location.replace(`/goal/${ goalId }`);
+    alert('Review from the advisor has been requested.');
   } else {
     alert('requestAdvisorReview: Failed to update adviser field for user to request the goal in the DB');
   }

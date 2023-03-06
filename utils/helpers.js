@@ -19,6 +19,6 @@ module.exports = {
     }
   },
   formatLine: (line) => {// cuts the string for preview
-    return line.slice(0,150);
+    return line.slice(0,250);
   }
 };
