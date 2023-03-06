@@ -1,7 +1,7 @@
-const botResponse = require('../utils/chatBots');
 
 const advisorMenuHandler = async (event) => { // request review button clicked and drop down list activated
   event.preventDefault();
+  console.log('drop down button click event');
   const menu = document.getElementById('advisorDropdownMenu').children[0]; // menu of dropdown items
   for (let i = 0; (i < menu.children.length); i++) { // add event listener for every advisor menu item
     menu.children[i].addEventListener('click', advisorMenuItemHandler);
@@ -15,11 +15,12 @@ const advisorMenuItemHandler = async (event) => { // advisor to comment item cli
   const date = new Date();
 
   //get the advisor ID from the drop down list
-  const advisorId = event.currentTarget.id.substring(document.location.href.lastIndexOf('menuItem') + 1);
+  const advisorId = event.currentTarget.id.substring(event.currentTarget.id.lastIndexOf('m') + 1);
+  console.log(advisorId);
   //get the goal ID from the URL
   const goalId = document.location.href.substring(document.location.href.lastIndexOf('/') + 1);
   //update the goal advice field with advisor ID in the database
-  const response = await fetch(`/goal/${ goalId }`, {
+  const response = await fetch(`/api/goals/${ goalId }`, {
     method: 'PUT',
     body: JSON.stringify({ advice: advisorId }),
     headers: { 'Content-Type': 'application/json' }
@@ -27,20 +28,22 @@ const advisorMenuItemHandler = async (event) => { // advisor to comment item cli
   if (response.ok) {
     //document.location.replace(`/goal/${ goalId }`);
   } else {
-    alert('requestAdvisorReview: Failed to update adviser filed for user to request the goal in the DB');
+    alert('requestAdvisorReview: Failed to update adviser field for user to request the goal in the DB');
   }
-  //check if the ChatGPT ID is in the advisor side then run the bot request and update the comment
+  //check if the ChatGPT ID is in the advisor side then 
+  // request API to run the bot and add the comment
   if (advisorId === '3') { // chatGPT advisor
-    // chatGPT model input
-    const testResponse = await botResponse(`Provide 3 most important items on how can I achieve my development goal named as: ${ goal.name }`);
+    // goal name
+    const goalName = document.getElementById('singleGoal').children[0].children[0].children[0].children[1].textContent;
     // attach the comment to the goal in the database
-    const responseCommentAttach = await fetch('/comment', {
+    const responseCommentAttach = await fetch('/api/comments/chatbot', {
       method: 'POST',
       body: JSON.stringify(
         {
           goalId: goalId,
           userId: advisorId,
-          body: testResponse
+          goalName: goalName,
+          date: date
         }),
       headers: {
         'Content-Type': 'application/json'
