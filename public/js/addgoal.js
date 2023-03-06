@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 const addGoalClickHandler = async (event) => {
   event.preventDefault();
   // Collect values from the form
