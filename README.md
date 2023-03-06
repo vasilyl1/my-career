@@ -64,7 +64,7 @@ WHEN I sign in as an advisor
 
 ## Deployment Link 🔗
 [Deployment link](https://my-career.herokuapp.com/)<br>
-[Repo link](https://github.com/vasilyl1/team-project)<br>
+[Repo link](https://github.com/vasilyl1/my-career)<br>
 
 ## API's
 [OpenAI API](https://openai.com/product#made-for-developers )<br>
