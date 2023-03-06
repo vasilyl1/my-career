@@ -1,3 +1,5 @@
+const { openModal, closeModal } = require('./loginmodal');
+
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
