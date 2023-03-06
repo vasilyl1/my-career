@@ -16,7 +16,6 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 
-
 // Update(PUT) a goal by ID
 router.put('/:id', withAuth, async (req, res) => {
 
