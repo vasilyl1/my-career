@@ -13,7 +13,7 @@ const botResponse = async (input) => {
       model: 'text-davinci-003',
       prompt: input,
       max_tokens: 2000,
-      temperature: 0
+      temperature: 0.8
     });
 
     return completion.data.choices[0].text;
