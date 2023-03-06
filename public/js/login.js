@@ -1,5 +1,17 @@
-// Import modal functions
-import { openModal, closeModal } from './loginPartial.js';
+// Modal functions
+function closeModal() {
+  const modal = document.querySelector('#modal');
+  modal.classList.add('hidden');
+  modal.classList.remove('modal-active');
+};
+
+function openModal(message) {
+  const modal = document.querySelector('#modal');
+  const modalMessage = document.querySelector('.modal-message');
+  modalMessage.textContent = message;
+  modal.classList.remove('hidden');
+  modal.classList.add('modal-active');
+};
 
 async function loginFormHandler(event) {
   event.preventDefault();
@@ -26,25 +38,16 @@ async function loginFormHandler(event) {
       document.querySelector('#loginPassword').value = '';
 
       // Display modal with error message
-      const modal = document.querySelector('.modal');
-      const modalMessage = document.querySelector('.modal__message');
-      modalMessage.textContent = 'Incorrect email or password.';
-      modal.classList.add('modal--active');
+      openModal('Incorrect email or password, please try again');
+      // Event listeners
+      const loginForm = document.querySelector('#loginForm');
+      const modalCloseButton = document.querySelector('#modal-cancel');
+      loginForm.addEventListener('submit', loginFormHandler);
+      modalCloseButton.addEventListener('click', closeModal);
     }
   }
 }
 
-// Hide modal on click
-const modalCloseHandler = (event) => {
-  const modal = document.querySelector('.modal');
-  modal.classList.remove('modal--active');
-};
-
-// Event listeners
-const loginForm = document.querySelector('#loginForm');
-const modalCloseButton = document.querySelector('#modal-cancel');
-loginForm.addEventListener('submit', loginFormHandler);
-modalCloseButton.addEventListener('click', modalCloseHandler);
 
 const signupFunction = async (event) => {
   event.preventDefault();
