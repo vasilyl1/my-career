@@ -40,20 +40,3 @@
   {{> modal}}
   {{> signup}}
   <script src="/js/login.js"></script>
-
-  <script>
-  //closeModal function defined
-    const closeModal = () => {
-    const modal = document.querySelector('.modal');
-    modal.classList.remove('modal--active');
-  }
-  //openModal function defined
-  const openModal = (message) => {
-    const modal = document.querySelector('.modal');
-    const modalMessage = document.querySelector('.modal__message');
-    modalMessage.textContent = message;
-    modal.classList.add('modal--active');
-  }
-  //Export closeModal, openModal to be used within login.js
-  export { closeModal, openModal };
-  </script>
