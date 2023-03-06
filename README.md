@@ -11,9 +11,9 @@ The project allows personal development plan lifecycle management. The potential
 Mohamed Osman, Vasily Likhovarydo, and Michael Frayne. 
 ```
 
-## Installation 
+## Screenshot
 
-N/A
+<img src='./images/screenshot.png'><br>
 
 ## User Story 📘
 ```
