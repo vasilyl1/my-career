@@ -1,7 +1,7 @@
 {{#if uData.advisor}}
   {{#each goal.comments as |comment|}}
     <div class='my-2 border border-zinc-600 rounded-md p-2 flex flex-col'>
-      <p class='flex self-end text-slate-400'>{{formatTime comment.date}} {{formatDate comment.date}}</p>
+      <p class='flex self-end text-slate-400'>{{daysSinceToday comment.date}} days ago</p>
       <p class='whitespace-normal break-words'>{{comment.body}}</p>
       <div class='flex flex-row justify-between mt-3'>
         <div id='commentBtnContainer'>
@@ -15,7 +15,7 @@
 {{else}}
   {{#each goal.comments as |comment|}}
     <div class='my-2 border border-zinc-600 rounded-md p-2 flex flex-col'>
-      <p class='flex self-end text-slate-400'>{{formatTime comment.date}} {{formatDate comment.date}}</p>
+      <p class='flex self-end text-slate-400'>{{daysSinceToday comment.date}} days ago</p>
       <p class='whitespace-normal break-words'>{{comment.body}}</p>
       <div class='flex flex-row justify-end mt-3'>
         <p class='font-semibold text-sky-500 mt-2'>{{comment.user.username}}</p>
