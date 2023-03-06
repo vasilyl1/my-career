@@ -3,6 +3,11 @@ module.exports = {
     // Format date as MM/DD/YYYY
     return date.toLocaleDateString();
   },
+  formatTime: (timestamp) => {
+    const date = new Date(timestamp);
+    const timeString = date.toLocaleTimeString();
+    return timeString;
+  },
   first: (array) => {
     return array && array[0];
   },
