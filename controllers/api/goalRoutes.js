@@ -4,7 +4,7 @@ const withAuth = require('../../utils/auth');
 
 
 // Create(POST) a new goal  router.post('/')
-router.post('', withAuth, async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     req.body.userId = req.session.userId;
     const goalData = await Goal.create(req.body);
@@ -17,7 +17,7 @@ router.post('', withAuth, async (req, res) => {
 
 
 // Update(PUT) a goal by ID router.put("/:id") -- /api/goals/:id
-router.put('/goal/:id', withAuth, async (req, res) => { // /api/goals/goal/:id
+router.put('/:id', withAuth, async (req, res) => { // /api/goals/goal/:id
   try {
     const goalData = await Goal.update(req.body, {
       where: {

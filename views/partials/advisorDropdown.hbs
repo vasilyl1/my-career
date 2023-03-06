@@ -2,7 +2,7 @@
   <div id='advisorDropdownMenu' class="w-44 origin-top absolute transform -translate-y-full rounded-md shadow-lg bg-gray-600 ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="advisorDropdownBtn" aria-hidden='true'>
     <div class="py-1" role='menu'>
       {{#each advisors as |advisor|}}
-        <a href="/advisor/{{advisor.value}}" class='block px-4 py-2 text-xs text-white hover:bg-gray-500' role="menuitem" tabindex="-1" id="menuItem{{advisor.value}}">{{advisor.name}}
+        <a class='block px-4 py-2 text-xs text-white hover:bg-gray-500' role="menuitem" tabindex="-1" id="menuItem{{advisor.value}}">{{advisor.name}}
         </a>
       {{/each}}
     </div>
@@ -16,3 +16,4 @@
     Request Review
   </button>
 </div>
+<script src="/js/requestAdvisorReview.js"></script>

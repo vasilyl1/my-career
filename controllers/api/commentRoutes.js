@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
+const botResponse = require('../../utils/chatBots');
 
 // CREATE(POST) a new comment
-router.post('/comment', withAuth, async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     req.body.goalId = req.params.id;
     req.body.userId = req.session.userId;
@@ -17,7 +18,7 @@ router.post('/comment', withAuth, async (req, res) => {
 });
 
 // UPDATE(PUT) a comment by ID
-router.put('/comment/:id', withAuth, async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
   try {
     const commentData = await Comment.update(req.body, {
       where: {
@@ -36,7 +37,7 @@ router.put('/comment/:id', withAuth, async (req, res) => {
 });
 
 // DELETE a comment by ID
-router.delete('/comment/:id', withAuth, async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
   try {
     const commentData = await Comment.destroy({
       where: {
@@ -48,12 +49,28 @@ router.delete('/comment/:id', withAuth, async (req, res) => {
       return;
     }
 
-    res.status(200).json({ message: 'comment delete success'});
+    res.status(200).json({ message: 'comment delete success' });
 
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
+
+// CREATE(POST) a new chatbot comment
+router.post('/chatbot', withAuth, async (req, res) => {
+  try {
+    // chatGPT model input
+    const testResponse = await botResponse(`Provide 3 randomly important items on how can I achieve my development goal named as: ${ req.goalName }`);
+    req.body.body = testResponse;
+    const commentData = await Comment.create(req.body);
+    const comment = commentData.get({ plain: true });
+    res.status(200).json(comment);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 
 module.exports = router;
