@@ -76,18 +76,25 @@ router.get('/goal/:id', withAuth, async (req, res) => {
     const goalData = await Goal.findByPk(req.params.id, {
       include: [
         {
-          model: Comment
+          model: Comment,
+          include: [
+            {
+              model: User,
+              attributes: ['username']
+            }
+          ]
         }
       ],
       where: {
         userId: req.session.userId
       }
-    }
-    );
+    });
+
     if (!goalData) {
       res.status(404).json({ message: 'No goal found with this ID' });
       return;
     }
+
     const goal = goalData.get({ plain: true });
 
     const advisorsData = await User.findAll({
