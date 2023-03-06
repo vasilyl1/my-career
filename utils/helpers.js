@@ -20,5 +20,12 @@ module.exports = {
   },
   formatLine: (line) => {// cuts the string for preview
     return line.slice(0,250);
+  },
+  daysSinceToday: (date) => {
+    const today = new Date();
+    const dateObj = new Date(date);
+    const diffTime = Math.abs(dateObj - today);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
   }
 };
