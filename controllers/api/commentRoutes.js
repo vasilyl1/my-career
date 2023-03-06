@@ -65,7 +65,7 @@ router.post('/chatbot', withAuth, async (req, res) => {
     const askBot = 
     `Help me to achieve the goal ${ req.goalName }. Please provide 3 random advises.`;
     const testResponse = await botResponse(askBot);
-    req.body.body = formatLine(testResponse.replace(/(\r\n|\n|\r)/gm,'').trim());
+    req.body.body = testResponse.trim();
     const commentData = await Comment.create(req.body);
     const comment = commentData.get({ plain: true });
     res.status(200).json(comment);
