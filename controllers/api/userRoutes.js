@@ -51,7 +51,8 @@ router.post('/signup', async (req, res) => {
     req.session.save(() => {
       req.session.userId = userData.id;
       req.session.loggedIn = true;
-      req.session.username = userData[i].username;
+      req.session.username = userData.username;
+      req.session.advisor = userData.advisor;
 
       res.status(200).json(userData);
     });
@@ -65,10 +66,10 @@ router.get('/logout', async (req, res) => {
   try {
     if (req.session.loggedIn) {
       req.session.destroy(() => {
-        res.status(204).redirect('/');
+        res.status(200).redirect('/');
       });
     } else {
-      res.status(404).json(err);
+      res.status(404).json({message: 'User is not logged in'});
     }
   } catch(err) {
     res.status(400).json(err);

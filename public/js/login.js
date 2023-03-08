@@ -24,7 +24,7 @@ async function loginFormHandler(event) {
     // Send a POST request to the /api/user/login route
     const response = await fetch('/api/user/login', {
       method: 'POST',
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email: email, password: password }),
       headers: { 'Content-Type': 'application/json' }
     });
 
@@ -32,7 +32,6 @@ async function loginFormHandler(event) {
       // If successful, redirect the browser to the dashboard page
       document.location.replace('/dashboard');
     } else {
-      console.error(response.statusText);
       // Clear the email and password fields on unsuccessful login attempt
       document.querySelector('#loginEmail').value = '';
       document.querySelector('#loginPassword').value = '';
@@ -40,7 +39,7 @@ async function loginFormHandler(event) {
       // Display modal with error message
       openModal('Incorrect email or password, please try again');
       // Event listeners
-      const loginForm = document.querySelector('#loginForm');
+      const loginForm = document.querySelector('#loginContainer');
       const modalCloseButton = document.querySelector('#modal-cancel');
       loginForm.addEventListener('submit', loginFormHandler);
       modalCloseButton.addEventListener('click', closeModal);
@@ -58,14 +57,21 @@ const signupFunction = async (event) => {
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
-  const name = document.querySelector('#name-signup').value.trim();
-  const email = document.querySelector('#email-signup').value.trim();
-  const password = document.querySelector('#password-signup').value.trim();
+  const username = document.querySelector('#newUserName').value.trim();
+  const email = document.querySelector('#newUserEmail').value.trim();
+  const password = document.querySelector('#newUserPassword').value.trim();
+  const advisor = false;
 
-  if (name && email && password) {
+  if (username && email && password) {
     const response = await fetch('/api/user/signup', {
       method: 'POST',
-      body: JSON.stringify({ name: name, email: email, password: password }),
+      body: JSON.stringify(
+        {
+          username: username,
+          email: email,
+          password: password,
+          advisor: advisor
+        }),
       headers: { 'Content-Type': 'application/json' }
     });
 
