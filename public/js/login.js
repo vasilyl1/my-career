@@ -24,7 +24,7 @@ async function loginFormHandler(event) {
     // Send a POST request to the /api/user/login route
     const response = await fetch('/api/user/login', {
       method: 'POST',
-      body: JSON.stringify({ email: email, password: password }),
+      body: JSON.stringify({ email, password }),
       headers: { 'Content-Type': 'application/json' }
     });
 
@@ -79,6 +79,7 @@ const signupFormHandler = async (event) => {
       document.location.replace('/dashboard');
     } else {
       console.error(response.statusText);
+      alert(response.statusText)
     }
   }
 };
@@ -87,7 +88,9 @@ document
   .getElementById('loginBtnSignIn')
   .addEventListener('click', loginFormHandler); // add event listener for when the login button is clicked
 
-document.getElementById('signupBtn').addEventListener('click', signupFunction);
+document
+  .getElementById('signupBtn')
+  .addEventListener('click', signupFunction);
 
 document
   .getElementById('signupSubmit')
