@@ -57,9 +57,9 @@ const signupFunction = async (event) => {
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
-  const username = document.querySelector('#newUserName').value.trim();
-  const email = document.querySelector('#newUserEmail').value.trim();
-  const password = document.querySelector('#newUserPassword').value.trim();
+  const username = await document.querySelector('#newUserName').value.trim();
+  const email = await document.querySelector('#newUserEmail').value.trim();
+  const password = await document.querySelector('#newUserPassword').value.trim();
   const advisor = false;
 
   if (username && email && password) {
