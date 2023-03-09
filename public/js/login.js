@@ -24,7 +24,7 @@ async function loginFormHandler(event) {
     // Send a POST request to the /api/user/login route
     const response = await fetch('/api/user/login', {
       method: 'POST',
-      body: JSON.stringify({ email: email, password: password }),
+      body: JSON.stringify({ email, password }),
       headers: { 'Content-Type': 'application/json' }
     });
 
@@ -57,9 +57,9 @@ const signupFunction = async (event) => {
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
-  const username = document.querySelector('#newUserName').value.trim();
-  const email = document.querySelector('#newUserEmail').value.trim();
-  const password = document.querySelector('#newUserPassword').value.trim();
+  const username = await document.querySelector('#newUserName').value.trim();
+  const email = await document.querySelector('#newUserEmail').value.trim();
+  const password = await document.querySelector('#newUserPassword').value.trim();
   const advisor = false;
 
   if (username && email && password) {
@@ -79,6 +79,8 @@ const signupFormHandler = async (event) => {
       document.location.replace('/dashboard');
     } else {
       console.error(response.statusText);
+      // eslint-disable-next-line no-alert
+      alert(response.statusText);
     }
   }
 };
@@ -87,7 +89,9 @@ document
   .getElementById('loginBtnSignIn')
   .addEventListener('click', loginFormHandler); // add event listener for when the login button is clicked
 
-document.getElementById('signupBtn').addEventListener('click', signupFunction);
+document
+  .getElementById('signupBtn')
+  .addEventListener('click', signupFunction);
 
 document
   .getElementById('signupSubmit')

@@ -6,7 +6,7 @@ const withAuth = require('../../utils/auth');
 // Create(POST) a new goal  router.post('/')
 router.post('/', withAuth, async (req, res) => {
   try {
-    req.body.userId = req.session.userId;
+    req.body.userId = await req.session.userId;
     const goalData = await Goal.create(req.body);
     res.status(200).json(goalData);
   } catch (err) {
@@ -14,7 +14,6 @@ router.post('/', withAuth, async (req, res) => {
     res.status(400).json(err);
   }
 });
-
 
 
 // Update(PUT) a goal by ID
