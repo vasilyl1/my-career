@@ -4,7 +4,7 @@ const deleteGoalClickHandler = async (event) => {
 
   //get the goal ID from the URL
   const goalId = document.location.href.substring(document.location.href.lastIndexOf('/') + 1);
- 
+
   try {
     const responseDeleteGoal = await fetch(`/api/goals/${ goalId }`, {
       method: 'DELETE'

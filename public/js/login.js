@@ -79,7 +79,8 @@ const signupFormHandler = async (event) => {
       document.location.replace('/dashboard');
     } else {
       console.error(response.statusText);
-      alert(response.statusText)
+      // eslint-disable-next-line no-alert
+      alert(response.statusText);
     }
   }
 };
