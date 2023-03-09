@@ -63,7 +63,7 @@ router.post('/chatbot', withAuth, async (req, res) => {
   try {
     // chatGPT model input
     const askBot = 
-    `Help me to achieve the goal ${ req.goalName }. Please provide 3 random advises.`;
+    `You are the proefessional advisor. Please advise me how to achieve my goal ${ req.goalName }. Please provide 3 random advises.`;
     const testResponse = await botResponse(askBot);
     req.body.body = testResponse.trim();
     const commentData = await Comment.create(req.body);
