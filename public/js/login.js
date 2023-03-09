@@ -39,10 +39,10 @@ async function loginFormHandler(event) {
       // Display modal with error message
       openModal('Incorrect email or password, please try again');
       // Event listeners
-      const loginForm = document.querySelector('#loginContainer');
-      const modalCloseButton = document.querySelector('#modal-cancel');
-      loginForm.addEventListener('submit', loginFormHandler);
-      modalCloseButton.addEventListener('click', closeModal);
+      //const loginForm = document.querySelector('#loginContainer');
+      //const modalCloseButton = document.querySelector('#modal-cancel');
+      //loginForm.addEventListener('submit', loginFormHandler);
+      //modalCloseButton.addEventListener('click', closeModal);
     }
   }
 }
@@ -56,13 +56,12 @@ const signupFunction = async (event) => {
 
 const signupFormHandler = async (event) => {
   event.preventDefault();
-
-  const username = await document.querySelector('#newUserName').value.trim();
-  const email = await document.querySelector('#newUserEmail').value.trim();
-  const password = await document.querySelector('#newUserPassword').value.trim();
+  const username = document.querySelector('#newUserName').value.trim();
+  const email = document.querySelector('#newUserEmail').value.trim();
+  const password = document.querySelector('#newUserPassword').value.trim();
   const advisor = false;
+  if (username && /^.{6,}$/.test(password) && /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
 
-  if (username && email && password) {
     const response = await fetch('/api/user/signup', {
       method: 'POST',
       body: JSON.stringify(
@@ -82,7 +81,13 @@ const signupFormHandler = async (event) => {
       // eslint-disable-next-line no-alert
       alert(response.statusText);
     }
+  } else if (!/^.{6,}$/.test(password)) {
+    alert('Password needs to be minimum 6 characters long');
   }
+  else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+    alert('Please enter valid e-mail');
+  }
+
 };
 
 document
@@ -96,3 +101,7 @@ document
 document
   .getElementById('signupSubmit')
   .addEventListener('click', signupFormHandler);
+
+document
+  .querySelector('#modal-cancel')
+  .addEventListener('click', closeModal);
